@@ -3,15 +3,20 @@ project:
   output-dir: docs
 
 website:
-  title: "git-website"
+  title: "Daniela Rodriguez-Chavez"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
-      - publications.qmd
-      - href: gschool.qmd
-        text: Grad School
+      - href: about.qmd
+        text: About Me
+      - research.qmd
+      # - publications.qmd
+      - community.qmd
+      - text: "Resources"
+        menu: 
+          - href: gschool.qmd
+            text: Grad School
+      - href: music-theater.qmd
+        text: Musical Theater
 
 format:
   html:
