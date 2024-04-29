@@ -1,23 +1,11 @@
 ---
 title: "Learn Statistics With Me"
 listing: 
-  contents: posts
-  sort: "date desc"
-  type: default
-  categories: true
+  contents: 
+    - "stat-blog/*.qmd"
+  sort: "title desc"
+  type: table
   sort-ui: false
-  filter-ui: false
+  fields: [title, date]
 page-layout: full
 ---
-
-About this site
-
-```{r}
-1 + 1
-```
-
-Local ESPM Community
-
-General Public
-
-Past Community Work
