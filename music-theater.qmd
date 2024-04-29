@@ -1,9 +1,14 @@
 ---
-title: "Grad School"
+title: "Musical Theater"
+title-block-banner: images/musical-theater-2.png
+include-in-header:
+  - text: |
+      <style>
+      .quarto-title-block .quarto-title-banner {
+        background-position-y: center;
+        height: 200px;
+      }
+      </style>
 ---
 
-About this site
-
-```{r}
-1 + 1
-```
+Musical theater!

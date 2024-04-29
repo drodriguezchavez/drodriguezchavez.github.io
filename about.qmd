@@ -1,11 +1,10 @@
 ---
 title: "About"
-title-block-banner: about-header.png
+title-block-banner: images/about-header.png
 include-in-header:
   - text: |
       <style>
       .quarto-title-block .quarto-title-banner {
-        background-image: url(images/about-header.png)
         background-position-y: center;
         height: 200px;
       }
