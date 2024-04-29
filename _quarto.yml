@@ -15,12 +15,16 @@ website:
         menu: 
           - href: gschool.qmd
             text: Grad School
+          - href: stat-blog.qmd
+            text: Learn Statistics With Me
       - href: music-theater.qmd
         text: Musical Theater
+  
 
 format:
   html:
     theme: cosmo # flatly, yeti, solar, litera, 
+    embed-resources: true
     css: styles.css
     toc: true
 
