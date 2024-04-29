@@ -20,7 +20,7 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: flatly # cosmo, yeti, solar, litera, 
     css: styles.css
     toc: true
 
