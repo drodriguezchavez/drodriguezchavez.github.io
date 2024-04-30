@@ -18,7 +18,7 @@
     "href": "index.html",
     "title": "Daniela Rodriguez-Chavez",
     "section": "",
-    "text": "Welcome to my site!\n\n5 + 5\n\n[1] 10"
+    "text": "Hello! My name is Daniela and I am a NSF Graduate Research & Chancellor’s Fellow at UC Berkeley in the de Valpine and Boettiger labs.\n\n\nNo renderer backend detected. gganimate will default to writing frames to separate files\nConsider installing:\n- the `gifski` package for gif output\n- the `av` package for video output\nand restarting the R session"
   },
   {
     "objectID": "about.html",
@@ -39,7 +39,7 @@
     "href": "research.html",
     "title": "Daniela Rodriguez-Chavez",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "About this site\n.\n\\[ \\begin{align}\\frac{dS(t)}{dt} &= -\\beta \\frac{S(t)I(t)}{N} \\\\\\frac{dI(t)}{dt} &= \\beta \\frac{S(t)I(t)}{N} - \\gamma I(t)\\\\\\frac{dR(t)}{dt} &= \\gamma I(t)\\end{align}\\]\n\nlibrary(deSolve)\ninitial &lt;- c(S = 99, I = 1, R = 0) # initial conditions \ntimes &lt;- 0:100 # time steps, 100 days\nparams &lt;- c(beta = 0.9, gamma = 0.5, N = 100) # model parameters \n\nSIR &lt;- function(t, y,  params){\n  with(as.list(c(params, y)), {\n    dS &lt;- -beta * S * I / N \n    dI &lt;- beta * S * I / N - gamma * I\n    dR &lt;- gamma * I\n    list(c(dS, dI, dR))\n  })\n}\n\nout.rk4 &lt;- rk4(initial, times, SIR, params) \nplot(out.rk4, ylim = c(0, 100), mfrow = NULL)\n\n\n\n\n\n\n\n\n\n\n\nresults &lt;- rk4(initial, times, SIR, params)\nR0 &lt;- 0.2 / 0.5 # beta / gamma \nplot(0:100, results[,2]*R0/100, type = \"l\",\n     xlab = \"time\", ylab = \"Effective reproductive number\") + \n  abline(h = 1, lty = 2)\n\n\n\n\ninteger(0)"
   },
   {
     "objectID": "outreach.html",

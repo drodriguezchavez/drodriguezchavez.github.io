@@ -6,8 +6,21 @@ about:
   template: jolla
 ---
 
-Welcome to my site!
+Hello! My name is Daniela and I am a NSF Graduate Research & Chancellor's Fellow at UC Berkeley in the de Valpine and Boettiger labs.
 
-```{r}
-5 + 5
+```{r, echo=FALSE}
+library(ggplot2)
+library(gganimate)
+x <- 1:5
+y1 <- c(1, 2, 9, 16, 25)
+
+# 2. Plot a first line
+# plot(x, y1, type = "b", frame = FALSE, pch = 19,
+     # col = "darkgreen", 
+     # xlab = "x", ylab = "y", 
+     # lty = 1, lwd = 1)
+# dat <- data.frame(x = 1:5, y = c(1, 2, 9, 16, 25))
+# p <- ggplot(dat, aes(x, y)) + geom_point()
+# 
+# animate(p)
 ```

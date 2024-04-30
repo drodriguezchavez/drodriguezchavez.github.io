@@ -7,6 +7,33 @@ about:
 
 About this site
 
+.
+
+$$ \begin{align}\frac{dS(t)}{dt} &= -\beta \frac{S(t)I(t)}{N} \\\frac{dI(t)}{dt} &= \beta \frac{S(t)I(t)}{N} - \gamma I(t)\\\frac{dR(t)}{dt} &= \gamma I(t)\end{align}$$
+
 ```{r}
-1 + 1
+library(deSolve)
+initial <- c(S = 99, I = 1, R = 0) # initial conditions 
+times <- 0:100 # time steps, 100 days
+params <- c(beta = 0.9, gamma = 0.5, N = 100) # model parameters 
+
+SIR <- function(t, y,  params){
+  with(as.list(c(params, y)), {
+    dS <- -beta * S * I / N 
+    dI <- beta * S * I / N - gamma * I
+    dR <- gamma * I
+    list(c(dS, dI, dR))
+  })
+}
+
+out.rk4 <- rk4(initial, times, SIR, params) 
+plot(out.rk4, ylim = c(0, 100), mfrow = NULL)
+```
+
+```{r}
+results <- rk4(initial, times, SIR, params)
+R0 <- 0.2 / 0.5 # beta / gamma 
+plot(0:100, results[,2]*R0/100, type = "l",
+     xlab = "time", ylab = "Effective reproductive number") + 
+  abline(h = 1, lty = 2)
 ```
