@@ -20,7 +20,12 @@ website:
             text: Learn Statistics With Me
       - href: music-theater.qmd
         text: Musical Theater
-  
+  page-footer: 
+    left: "Last updated April 2024" 
+    right: 
+      - icon: mailbox 
+        href: "mailto:drodriguezchavez@berkeley.edu"
+    
 
 format:
   html:
