@@ -18,7 +18,7 @@
     "href": "index.html",
     "title": "Daniela Rodriguez-Chavez",
     "section": "",
-    "text": "Hello! My name is Daniela and I am a NSF Graduate Research & Chancellor’s Fellow at UC Berkeley in the de Valpine and Boettiger labs.\n\n\nNo renderer backend detected. gganimate will default to writing frames to separate files\nConsider installing:\n- the `gifski` package for gif output\n- the `av` package for video output\nand restarting the R session"
+    "text": "Hello! My name is Daniela and I am a NSF Graduate Research & Chancellor’s Fellow at UC Berkeley in both the de Valpine and Boettiger labs. I’m really interested in infectious disease modeling and I plan to use this time to develop skills in time series,\nOn this site you’ll get to know a little bit more about me, the research I’ve done (and am currently doing),"
   },
   {
     "objectID": "about.html",
