@@ -1,5 +1,8 @@
 ---
-title: "Research"
+title: " "
+about:
+  template: trestles
+  image: images/research-2.png
 ---
 
 About this site
