@@ -2,14 +2,16 @@
 title: "In Community"
 ---
 
-About this site
+### Local ESPM Community
 
-```{r}
-1 + 1
-```
+-   Wiki Coordinator
+-   Slack Coordinator
+-   Alumni Coordinator
 
-Local ESPM Community
+### The Bay Area 
 
-General Public
+-   
 
-Past Community Work
+### Past Community Work
+
+-   Created workshops, marketing, and website edits for the [Ithaca EcoVillage](https://www.thriveithaca.org/volunteer)
