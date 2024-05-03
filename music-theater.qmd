@@ -14,6 +14,5 @@ include-in-header:
 
 Musical theater!
 
-<<<<<<< HEAD
-Not only do I enjoy watching it, but I also go to a lot of shows! testingtesting!
+Not only do I enjoy watching it, but I also go to a lot of shows! This was pushed after deleting gh-pages!
 
