@@ -14,14 +14,14 @@ website:
       - community.qmd
       - text: "Resources"
         menu: 
-          - href: gschool.qmd
-            text: Grad School
+          # - href: gschool.qmd
+          #   text: Grad School
           - href: stat-blog.qmd
             text: Learn Statistics With Me
       - href: music-theater.qmd
         text: Musical Theater
   page-footer: 
-    left: "Last updated April 2024" 
+    left: "Last updated May 2024" 
     right: 
       - icon: mailbox 
         href: "mailto:drodriguezchavez@berkeley.edu"

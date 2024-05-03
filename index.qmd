@@ -1,6 +1,6 @@
 ---
 title: "Daniela Rodriguez-Chavez"
-subtitle: "PhD Candidate in the Environmental, Policy, & Management program at UC Berkeley"
+subtitle: "PhD Candidate in the Environmental Science, Policy, & Management program at UC Berkeley"
 image: images/profile.png
 about:
   template: jolla
