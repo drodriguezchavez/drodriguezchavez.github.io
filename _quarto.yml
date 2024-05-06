@@ -25,6 +25,8 @@ website:
     right: 
       - icon: mailbox 
         href: "mailto:drodriguezchavez@berkeley.edu"
+      - icon: linkedin
+        href: https://www.linkedin.com/in/daniela-rodriguez-chavez/
     
 
 format:
