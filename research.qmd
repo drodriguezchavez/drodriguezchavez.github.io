@@ -17,7 +17,7 @@ A classmate of mine in undergrad once told me that there are models that fit fun
 
 ### Current Work
 
-Currently, I am exploring the spatio-temporal relationships between dengue, chikungunya, and dengue in Brazil from 2016-present. I am interested in learning how statistical models can better understand these interactions for forecasting and use dynamical systems modeling to better understand multi-pathogen systems. *This work is being done in collaboration with [Joe Lewnard](https://joelewnard.github.io/joelewnard/).*
+Currently, I am exploring the spatio-temporal relationships between dengue, chikungunya, and zika in Brazil from 2016-present. I am interested in learning how statistical models can better understand these interactions for forecasting and use dynamical systems modeling to better understand multi-pathogen systems. *This work is being done in collaboration with [Joe Lewnard](https://joelewnard.github.io/joelewnard/).*
 
 ### Publications
 
