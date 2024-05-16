@@ -6,6 +6,6 @@ listing:
   sort: "title desc"
   type: table
   sort-ui: false
-  fields: [title, date]
+  fields: [title, Keywords, date]
 page-layout: full
 ---

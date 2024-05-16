@@ -1,6 +1,7 @@
 ---
 title: "Maximum Likelihood"
 date: 04/30/2024
+Keywords: "MLE, Hessian, regression"
 ---
 
 Maximum likelihood
