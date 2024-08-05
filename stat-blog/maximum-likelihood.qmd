@@ -5,3 +5,7 @@ Keywords: "MLE, Hessian, regression"
 ---
 
 Maximum likelihood
+
+In statistics, maximum likelihood estimation (MLE) is a method of estimating the parameters of an assumed probability distribution, given some observed data. This is achieved by maximizing a likelihood function so that, under the assumed statistical model, the observed data is most probable. The point in the parameter space that maximizes the likelihood function is called the maximum likelihood estimate.\[1\] The logic of maximum likelihood is both intuitive and flexible, and as such the method has become a dominant means of statistical inference.\[2\]\[3\]\[4\]
+
+Let's break down this first paragraph into various components: parameters, assumed probability distribution, likelihood function, and parameter space. But how does MLE actually work? There are three main concepts that I had to wrap my head around
