@@ -6,30 +6,44 @@ Keywords: "MLE, Hessian, regression"
 
 To start, let's do the first thing many do when trying to learn about a new topic: go to the [Wikipedia page](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation) for it. Let's start with that first paragraph:
 
-*In statistics,* *maximum likelihood estimation (MLE) is a method of estimating the **parameters** of an **assumed probability distribution**, given some observed data. This is achieved by maximizing a **likelihood function** so that, under the assumed statistical model, the observed data is most probable. The point in the **parameter space** that maximizes the likelihood function is called the [maximum likelihood estimate]{.underline}. The logic of maximum likelihood is both intuitive and flexible, and as such the method has become a dominant means of statistical inference. (Taken directly from Wikipedia.)*
+*In statistics,* *maximum likelihood estimation (MLE) is a method of estimating the **parameters** of an **assumed probability distribution**, given some **observed data**. This is achieved by maximizing a **likelihood function** so that, under the assumed statistical model, the observed data is most probable. The point in the **parameter space** that maximizes the likelihood function is called the [maximum likelihood estimate]{.underline}. The logic of maximum likelihood is both intuitive and flexible, and as such the method has become a dominant means of statistical inference. (Taken directly from Wikipedia.)*
 
-Hopefully if it's not intuitive as of yet, it will be once we work through this. Let's break down this first paragraph into various components: parameters, assumed probability distribution, likelihood function, and parameter space.
+Hopefully if it's not intuitive as of yet, it will be once we work through this. Let's break down this first paragraph into various components: **parameters**, **assumed probability distribution**, **observed data**, **likelihood function**, and **parameter space**.
 
 -   Let's first take about the **assumed probability distribution**. This is the type of distribution you *assume* your data is coming from. For example, for count data, we often use the Poisson distribution, denoted $$ Pois(\lambda) = \frac{\lambda^k e^{-\lambda}}{k!} $$ where $k$ is the number of events that occur in an interval given by rate $\lambda$.
 
--   In the above example, $\lambda$ is what we call a **parameter**.
+-   In the above example, $\lambda$ is what we call a **parameter**. This is a value that describes, in a Frequentist sense, the "true value" of your population.
+
+```{r, echo = FALSE}
+library(ggplot2)
+library(latex2exp)
+vals <- seq(0,50,1)
+# pois_df <- 
+ 
+ggplot() +
+  geom_line(aes(x = vals, y = dpois(vals, lambda = 2), color = "2")) + 
+  geom_line(aes(x = vals, y = dpois(vals, lambda = 4), color = '4')) +
+  geom_line(aes(x = vals, y = dpois(vals, lambda = 8), color = '8')) +
+  geom_line(aes(x = vals, y = dpois(vals, lambda = 16), color = '16')) +
+  geom_line(aes(x = vals, y = dpois(vals, lambda = 32), color = '32')) +
+  labs(x = "Counts", y = expression(Pr(X == x))) + 
+  scale_color_manual(name = expression(lambda),
+                     breaks = c("2", "4", "8", "16", "32"),
+                     values = c("2" = "red", "4" = "orange", 
+                                "8" = 'green', "16" = "blue", "32" = "purple"))
+
+```
+
+-   Often, we are trying to figure out what the best parameter value fit for our data is, to try and get at the "true value" of where our data comes from. Say you want to know the average length of a fish in the closest lake to you (in my case, Lake Merritt, which is home to many a [strange creature](https://baynature.org/biodiversity/enigmatica/)). The most obvious way to do this, would be to measure all of the fish! Then you would get the "true value" of the population mean. But, you realistically can't measure all of the fish in the lake. That's a lot of time and patience, as well as luck that you simply don't have. But! You do have a couple of fish that you caught lying around, so you could measure those. This is your observed data. You then use this data to figure out what parameter fits best
+
+```{r, echo = FALSE}
+
+```
 
 But how does MLE actually work? There are three main concepts that I had to wrap my head around
 
 Now, in reality, what does this process look like?
 
 ```{r, echo = FALSE}
-library(ggplot2)
 
-# Color Scale
-mtcars$pc <- predict(prcomp(~wt + mpg, mtcars))[,1]
-
-# Scatter Plot
-ggplot(mtcars, aes(wt, mpg, color = pc)) +
-  geom_point(shape = 16, size = 5, alpha = 0.4, show.legend = FALSE) +
-  theme_minimal() + 
-  scale_color_gradient(low = "#0091ff", high = "#f0650e") +
-  xlab('Weight (1,000 lbs)') +
-  ylab('MPG') +
-  ggtitle('Weight Vs. MPG')
 ```
