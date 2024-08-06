@@ -1,0 +1,7 @@
+---
+title: "Maximum Likelihood II"
+date: 08/14/2024
+Keywords: "MLE, confidence intervals, Hessian"
+---
+
+MLE II

@@ -25,7 +25,7 @@
     "href": "stat-blog.html",
     "title": "Learn Statistics With Me",
     "section": "",
-    "text": "Title\n\n\nKeywords\n\n\nDate\n\n\n\n\n\n\nOnline Resources\n\n\nYouTube, independent learning\n\n\nMay 14, 2024\n\n\n\n\nMonte Carlo Markov Chains (MCMC)\n\n\nMCMC, maximum likelihood, optimization\n\n\nAug 14, 2024\n\n\n\n\nMaximum Likelihood\n\n\nMLE, distribution, regression\n\n\nApr 30, 2024\n\n\n\n\n\nNo matching items"
+    "text": "Title\n\n\nKeywords\n\n\nDate\n\n\n\n\n\n\nOnline Resources\n\n\nYouTube, independent learning\n\n\nMay 14, 2024\n\n\n\n\nMonte Carlo Markov Chains (MCMC)\n\n\nMCMC, maximum likelihood, optimization\n\n\nAug 14, 2024\n\n\n\n\nMaximum Likelihood II\n\n\nMLE, confidence intervals, Hessian\n\n\nAug 14, 2024\n\n\n\n\nMaximum Likelihood\n\n\nMLE, distribution, regression\n\n\nAug 5, 2024\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "research.html",
@@ -82,5 +82,12 @@
     "title": "Monte Carlo Markov Chains (MCMC)",
     "section": "",
     "text": "MCMC"
+  },
+  {
+    "objectID": "stat-blog/maximum-likelihood-ii.html",
+    "href": "stat-blog/maximum-likelihood-ii.html",
+    "title": "Maximum Likelihood II",
+    "section": "",
+    "text": "MLE II"
   }
 ]
