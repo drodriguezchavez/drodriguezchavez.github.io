@@ -25,7 +25,7 @@
     "href": "stat-blog.html",
     "title": "Learn Statistics With Me",
     "section": "",
-    "text": "Title\n\n\nKeywords\n\n\nDate\n\n\n\n\n\n\nOnline Resources\n\n\nYouTube, independent learning\n\n\nMay 14, 2024\n\n\n\n\nMonte Carlo Markov Chains (MCMC)\n\n\nMCMC, maximum likelihood, optimization\n\n\nAug 14, 2024\n\n\n\n\nMaximum Likelihood\n\n\nMLE, Hessian, regression\n\n\nApr 30, 2024\n\n\n\n\n\nNo matching items"
+    "text": "Title\n\n\nKeywords\n\n\nDate\n\n\n\n\n\n\nOnline Resources\n\n\nYouTube, independent learning\n\n\nMay 14, 2024\n\n\n\n\nMonte Carlo Markov Chains (MCMC)\n\n\nMCMC, maximum likelihood, optimization\n\n\nAug 14, 2024\n\n\n\n\nMaximum Likelihood\n\n\nMLE, distribution, regression\n\n\nApr 30, 2024\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "research.html",
@@ -75,5 +75,12 @@
     "title": "Maximum Likelihood",
     "section": "other notes",
     "text": "other notes\nWhat is Frequentist vs. Bayesian? This is a great rabbit hole to dive into! My general understanding is that a Frequentist viewpoint comes from the idea that there is a “true” parameter value that is fixed and we are trying to uncover from our observed data. The Bayesian framework comes from the idea that our parameter values themselves are random variables that come from a distribution, which we can specify (this is called your prior distribution) to hopefully gain a better understanding of where the data comes from. Recommended reading: Statistical Modeling: The Two Cultures by Breiman (2001) and Bayesians, Frequentists, and Scientists by Efron (2005).\nBut the real world isn’t independent and identically distributed! Now there are a lot of assumptions in statistics and this took me a while to get used to. It’s a very different language to learn. What helped me “buy into the system,” so to speak, is to really take in the quote “all models are wrong, but some are useful.” Statistics does not describe the real world down to every blade of grass, but it can help us to uncover trends and give us the best tool we have to estimate parameters that have very real implications in fields such as healthcare and the environment (i.e. setting thresholds of toxicity, etc.). Recommended reading: Data Detective by Tim Harford.\nI still have thoughts and questions! Feel free to let me know how I can improve this post with other resources by clicking the mailbox icon at the bottom :)"
+  },
+  {
+    "objectID": "stat-blog/mcmc.html",
+    "href": "stat-blog/mcmc.html",
+    "title": "Monte Carlo Markov Chains (MCMC)",
+    "section": "",
+    "text": "MCMC"
   }
 ]

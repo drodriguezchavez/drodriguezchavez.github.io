@@ -1,7 +1,7 @@
 ---
 title: "Maximum Likelihood"
 date: 04/30/2024
-Keywords: "MLE, Hessian, regression"
+Keywords: "MLE, distribution, regression"
 ---
 
 ```{r, echo = FALSE, include = FALSE}
