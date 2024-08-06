@@ -38,7 +38,7 @@ ggplot() +
 
 ```
 
-Often, we are trying to figure out what the best parameter value fit for our data is, to try and get at the "true value" of where our data comes from. Say you want to know the average amount of chicks are in a clutch laid by the [Black-crowned Night Heron](https://www.allaboutbirds.org/guide/Black-crowned_Night_Heron/id#) in your neighborhood (which are found aplenty in Lake Merritt, a home to many a [strange creature](https://baynature.org/biodiversity/enigmatica/)). The most obvious way to do this, would be to measure all of the chicks in each clutch! Then you would get the "true value" of the population mean. But, you realistically can't measure all of the baby birds in the area. That's a lot of time and patience, as well as luck that you simply don't have. But! You do have a couple of Night Heron clutches that you found lying around, so you counted the amount of chicks in each of those. So this is your **observed data**. You then use this data to figure out what your best guess for a parameter would be.
+Often, we are trying to figure out what the best parameter value fit for our data is, to try and get at the "true value" of where our data comes from. Say you want to know the average amount of chicks in a clutch laid by the [Black-crowned Night Heron](https://www.allaboutbirds.org/guide/Black-crowned_Night_Heron/id#) in your neighborhood (which are found aplenty in Lake Merritt, a home to many a [strange creature](https://baynature.org/biodiversity/enigmatica/)). The most obvious way to do this, would be to measure all of the chicks in each clutch! Then you would get the "true value" of the population mean. But, you realistically can't measure all of the baby birds in the area. That's a lot of time and patience, as well as luck that you simply don't have. But! You do have a couple of Night Heron clutches that you found lying around, so you counted the amount of chicks in each of those. So this is your **observed data**. You then use this data to figure out what your best guess for a parameter would be.
 
 ```{r, echo = FALSE}
 set.seed(2)
@@ -48,7 +48,7 @@ size <- rpois(10, lambda = 5)
 dat <- as.data.frame(size, clutch);dat
 ```
 
-Now, let's do some *assuming* here (the Frequentist view). Because we can only have a non-negative number of baby chicks and they are integers (you can't have 0.1 of a baby chick) let's *assume* that the clutch sizes come from the Poisson distribution, the one we mentioned earlier. Let us also *assume* that each clutch is **independent and identically distributed**, meaning that each clutch size does not depend on another and we *assume* that all of them come from the same distribution.
+Now, let's do some *assuming* here (the Frequentist view). Because we can only have a non-negative number of baby chicks and they are integers (you can't have 0.1 of a baby chick) let's *assume* that the clutch sizes come from the Poisson distribution, the one we mentioned earlier. Let us also *assume* that each clutch is **independent and identically distributed**, meaning that each clutch size does not depend on another and we *assume* that all come from the same distribution.
 
 ```{r, echo=FALSE}
 ggplot() + 
@@ -69,12 +69,11 @@ Now, I know what you're thinking: we still don't know $\lambda$! And this is tru
 
 $$f(\lambda) = \Pi_1^n \frac{\lambda^{k_i} e^{-\lambda}}{k_i!}$$
 
-*Note that* $n$ *is our number of data points and* $k_i$ *represents a single data point value.*
+*Note that* $\Pi$ *just means to multiply values together, much like how* $\Sigma$ *adds items together.* $n$ *is our number of data points and* $k_i$ *represents a single data point value.*
 
 As we know, the higher the number from a probability function, the more probable it is for that scenario or set of conditions to happen. In this case, we want to find the value of **parameter** $\lambda$ from our **function** we have just created, that is the most **likely**. Can you guess the official name of our function now? It's the **likelihood function**! *Note that for computational reasons, you will often see the log scale version of this.*
 
-$$L(\lambda) = \sum_1^n (log(\lambda^{k_i}) + log(e^{-\lambda}) - log(k_i!)) $$
-$$ = \sum_1^n (k_i *log (\lambda) -\lambda - log(k_i!) )$$ Plugging in a few values, we see a general curve appear below!
+$$L(\lambda) = \sum_1^n (log(\lambda^{k_i}) + log(e^{-\lambda}) - log(k_i!)) $$ $$ = \sum_1^n (k_i *log (\lambda) -\lambda - log(k_i!) )$$ Plugging in a few values, we see a general curve appear below!
 
 ```{r, echo = FALSE}
 llh <- function(lambda) {
@@ -96,6 +95,8 @@ $$ \sum_i^n k_i/n = \hat{\lambda} $$
 
 Which in our case does equal 5.5! *Note that the hat on* $\lambda$ *is used to denote it as an estimator.*
 
+We can now happily complete our inquiry and be confident that our birds are likely delivering on average a clutch size of 5.5/year, Poisson distributed. *But this isn't an integer*, you may be inclined to say. Well, $\lambda$ is an average. If you saw two dogs one day and then three dogs the next, you would be seeing an average of 2.5 dogs a day even though it's physically impossible (or just really sad) to see half a dog!
+
 However two questions immediately arise once we start to deal with more complicated data and distributions.
 
 1.  How do I calculate derivatives for more complicated distributions (and do I have to)?
@@ -103,7 +104,7 @@ However two questions immediately arise once we start to deal with more complica
 
 Both of these questions can be answered the same: optimization! In reality, no pencil-and-paper differentiation is used. Your regular linear regression in R uses these techniques to find the intercept and slope of the regressions. Then, there are other packages such as *nimble* that use a method called MCMC under a Bayesian framework that will return to you parameter estimates using the same principles as defined here, but it can be much harder to imagine, for example, a 4d space, so it's nice that they can do it for us! If you're interested, I have a blog post on MCMC right [here](mcmc.qmd).
 
-## other notes 
+## other notes
 
 **What is Frequentist vs. Bayesian?** This is a great rabbit hole to dive into! My general understanding is that a Frequentist viewpoint comes from the idea that there is a "true" parameter value that is fixed and we are trying to uncover from our observed data. The Bayesian framework comes from the idea that our parameter values themselves are random variables that come from a distribution, which we can specify (this is called your prior distribution) to hopefully gain a better understanding of where the data comes from. *Recommended reading: Statistical Modeling: The Two Cultures by Breiman (2001) and Bayesians, Frequentists, and Scientists by Efron (2005).*
 
