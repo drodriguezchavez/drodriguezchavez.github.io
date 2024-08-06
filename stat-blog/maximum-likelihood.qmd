@@ -41,10 +41,10 @@ ggplot() +
 Often, we are trying to figure out what the best parameter value fit for our data is, to try and get at the "true value" of where our data comes from. Say you want to know the average amount of chicks are in a clutch laid by the [Black-crowned Night Heron](https://www.allaboutbirds.org/guide/Black-crowned_Night_Heron/id#) in your neighborhood (which are found aplenty in Lake Merritt, a home to many a [strange creature](https://baynature.org/biodiversity/enigmatica/)). The most obvious way to do this, would be to measure all of the chicks in each clutch! Then you would get the "true value" of the population mean. But, you realistically can't measure all of the baby birds in the area. That's a lot of time and patience, as well as luck that you simply don't have. But! You do have a couple of Night Heron clutches that you found lying around, so you counted the amount of chicks in each of those. So this is your **observed data**. You then use this data to figure out what your best guess for a parameter would be.
 
 ```{r, echo = FALSE}
-set.seed(1)
+set.seed(2)
 clutch <- c('Clutch 1', 'Clutch 2', 'Clutch 3', 'Clutch 4', 'Clutch 5',
             'Clutch 6', 'Clutch 7', 'Clutch 8', 'Clutch 9', 'Clutch 10')
-size <- rpois(10, lambda = 4)
+size <- rpois(10, lambda = 5)
 dat <- as.data.frame(size, clutch);dat
 ```
 
@@ -53,7 +53,7 @@ Now, let's do some *assuming* here (the Frequentist view). Because we can only h
 ```{r, echo=FALSE}
 ggplot() + 
   geom_point(aes(x = 1:10, y = dat$size), size = 4) + 
-  ylim(c(0,8)) +
+  ylim(c(0,10)) +
   xlab("Clutch #") + 
   ylab("Size of each clutch") + 
   scale_x_continuous(breaks = 1:10) + 
@@ -71,14 +71,42 @@ $$f(\lambda) = \Pi_1^n \frac{\lambda^{k_i} e^{-\lambda}}{k_i!}$$
 
 *Note that* $n$ *is our number of data points and* $k_i$ *represents a single data point value.*
 
-As we know, the higher the number from a probability function, the more probable it is for that scenario or set of conditions to happen. In this case, we want to find the value of **parameter** $\lambda$ from our **function** we have just created, that is the most **likely**. Can you guess the official name of our function now? It's the **likelihood function**!
+As we know, the higher the number from a probability function, the more probable it is for that scenario or set of conditions to happen. In this case, we want to find the value of **parameter** $\lambda$ from our **function** we have just created, that is the most **likely**. Can you guess the official name of our function now? It's the **likelihood function**! *Note that for computational reasons, you will often see the log scale version of this.*
+
+$$L(\lambda) = \sum_1^n (log(\lambda^{k_i}) + log(e^{-\lambda}) - log(k_i!)) $$
+$$ = \sum_1^n (k_i *log (\lambda) -\lambda - log(k_i!) )$$ Plugging in a few values, we see a general curve appear below!
 
 ```{r, echo = FALSE}
-
+llh <- function(lambda) {
+  # remember that R does log-linear, so lambda is actually exp(lambda)
+  (sum(dat$size*log(lambda))) - length(dat$size)*lambda - sum(log(factorial(dat$size))) 
+}
+lik_vals <- c(llh(3), llh(3.5), llh(4), llh(4.5), llh(5), llh(5.5), llh(6), llh(6.5), llh(7), llh(7.5), llh(8))
+plot(seq(3, 8, 0.5), lik_vals, pch = 19, ylim = c(-35, -20),
+     xlab = expression(lambda), ylab = expression(L(lambda))) 
 ```
 
-Now there are a lot of assumptions in statistics and this took me a while to get used to.
+This graph above is a visualization of what we call the **parameter space**. We are seeing where the maximum is along a set of guess parameter values. Looking at our log-**likelihood function** above (or surface if it's two parameter values, such as in the normal distribution), we see that a $\lambda$ value of around 5.5 might be the maximum.
 
-Do you have to differentiate every likelihood function you come up with? No!
+Unsatisfied with this? Is there a way to get the exact maximum without just looking at the graph and guessing? If you ever took calculus, you'll remember that to find the maximum of a function, you can take the derivative of the function, set it to 0, and find the parameter value that satisfies that equation.
 
-Note that we usually use a log scale for the
+$$ L'(\lambda) = \sum_1^n (\frac{k_i}{\lambda} - 1) = 0 $$
+
+$$ \sum_i^n k_i/n = \hat{\lambda} $$
+
+Which in our case does equal 5.5! *Note that the hat on* $\lambda$ *is used to denote it as an estimator.*
+
+However two questions immediately arise once we start to deal with more complicated data and distributions.
+
+1.  How do I calculate derivatives for more complicated distributions (and do I have to)?
+2.  What happens if you have more than one or two parameters?
+
+Both of these questions can be answered the same: optimization! In reality, no pencil-and-paper differentiation is used. Your regular linear regression in R uses these techniques to find the intercept and slope of the regressions. Then, there are other packages such as *nimble* that use a method called MCMC under a Bayesian framework that will return to you parameter estimates using the same principles as defined here, but it can be much harder to imagine, for example, a 4d space, so it's nice that they can do it for us! If you're interested, I have a blog post on MCMC right [here](mcmc.qmd).
+
+## other notes 
+
+**What is Frequentist vs. Bayesian?** This is a great rabbit hole to dive into! My general understanding is that a Frequentist viewpoint comes from the idea that there is a "true" parameter value that is fixed and we are trying to uncover from our observed data. The Bayesian framework comes from the idea that our parameter values themselves are random variables that come from a distribution, which we can specify (this is called your prior distribution) to hopefully gain a better understanding of where the data comes from. *Recommended reading: Statistical Modeling: The Two Cultures by Breiman (2001) and Bayesians, Frequentists, and Scientists by Efron (2005).*
+
+**But the real world isn't independent and identically distributed!** Now there are a lot of assumptions in statistics and this took me a while to get used to. It's a very different language to learn. What helped me "buy into the system," so to speak, is to really take in the quote *"all models are wrong, but some are useful."* Statistics does not describe the real world down to every blade of grass, but it can help us to uncover trends and give us the best tool we have to estimate parameters that have very real implications in fields such as healthcare and the environment (i.e. setting thresholds of toxicity, etc.). *Recommended reading: Data Detective by Tim Harford.*
+
+**I still have thoughts and questions!** Feel free to let me know how I can improve this post with other resources by clicking the mailbox icon at the bottom :)
