@@ -4,4 +4,12 @@ date: 08/14/2024
 Keywords: "maximum likelihood, confidence intervals, Hessian"
 ---
 
-MCMC
+MLE Part II
+
+In the first Maximum Likelihood post,
+
+-   Confidence Intervals
+
+-   The Hessian
+
+-   Visualization of slope and curvature
