@@ -13,33 +13,66 @@ In doctoral programs, the emphasis is on contributing original research to the f
 
 Another main point to note is that while most graduate programs require payment to attend, [doctoral degrees are usually paid.]{.underline} You should never pay to attend a doctoral program. *Note that the pay will be different whether you choose to attend a public or private university, but there should be pay regardless.*
 
+**The rest of this article is generally for applying to PhD programs, since that is what I am most familiar with. I'm not sure if this generalizes to folks wanting to do other graduate degrees, so take it with a grain of salt.**
+
 ### How do I know if I want to go?
 
 Graduate school, especially a doctoral program, is not something to be taken lightly. Here, I tried to distill the two main areas that I thought about before applying to graduate school.
 
 #### [career goals]{.underline}
 
-Please, *please*, do not think that getting a PhD "pigeon-holes" you into doing anything. In my mind, view a PhD as a time in your life where you are given the opportunity to build specific skills and learn about a specific topic you are interested in.
+It's helpful to keep in mind what kind of career you currently think you want to have. If getting a PhD is on the way to getting that career, that's an indication that graduate school might be a good fit. But if getting a PhD is not necessary for a specific career, that does not mean you shouldn't go to graduate school, it just means you have to think harder about why a PhD is necessary.
 
-It's not so much that a PhD blocks you from certain career paths, but rather moves you to
+In my mind, view a PhD as a time in your life where you are given the opportunity to build specific skills and learn about a specific topic you are interested in. You want to use that time wisely. Please, *please*, do not think that getting a PhD "pigeon-holes" you into doing anything. Obviously if you get a PhD in English Literature, it might be harder to become a surgeon, but you could say that about many things. It's not so much that a PhD blocks you from certain career paths, but rather moves you to be more likely to do certain career paths, such as a research scientist (whether public or private sector), professor, or even science-communication related roles such as policy-advisor, journalism, advocacy, etc. (Not to say you can't do many of these jobs without a PhD, but it certainly makes things easier.)
+
+However, the main thing about getting a PhD, is that you must conduct research, in whatever form that may take depending on the field.
 
 #### [research]{.underline}
 
-The
+The core backbone of a PhD is the research you produce. So, I would recommend doing research before applying to graduate school to see if you like it. It is also helpful to reference projects you've done and how they've shaped your research journey when applying to graduate school. Here are some ways that I got into research:
+
+-    Is there a topic you're interested in from a class? Reach out to the professor to see what other work has been done in it.
+-   Did your professor mention a project they were working on in class? Reach out to see if you can help.
+-   Check out [Research Experiences for Undergrads](https://new.nsf.gov/funding/initiatives/reu/students) (REUs), these were a great way to spend a summer feeling what research can be like!
+-   Are there clubs on campus that do research? Chat with some folks or apply and see if they peak your interest.
+
+Research is hard! It's squishy. It doesn't have to be a 9-to-5 job. It can take a lot of stamina. In any job there are going to be things you don't enjoy, but [make sure to figure out what you do and don't like]{.underline}. It's also okay to try out different research areas! Especially if you're coming from a quantitative field. I personally knew I liked research because I enjoyed the flexibility of working (generally) when I wanted to and I enjoyed applying my quantitative skills to a new problem that I got to ask. But it took me a while (about three years) to really find an area of research I really enjoyed.
 
 ### How do I apply to graduate school?
 
-So you've now decided to apply to graduate school, congrats!
+So you've now decided to apply to graduate school, congrats! You've clearly thought about it which is going to be helpful for application process. Now, every graduate program has a website where they detail the requirements. But, there are also unspoken rules that (I think) helped me significantly increase my chances of being accepted.
 
-#### [The unspoken rules]{.underline}
+#### [the usual requirements]{.underline}
 
-#### [The usual requirements]{.underline}
+At this point in time, the Graduate Record Examinations (GRE) is mostly optional when applying. I did not take it, but I know some people did and you should only include it if it can help you.
 
-#### [Statement of Purpose]{.underline}
+In addition to the GRE, there's also the Statement of Purpose (SOP). Think of your SOP as a way for you to sell your story. You've thought about why you want to do a PhD quite a bit at this point! Here's where you can craft the narrative to make a probably winding journey seem very natural. You'll want to incorporate not only how you got interested in the research path you intend to take at the program, but also what you learned and how you grew from different research experiences. Make sure to mention [*why you need this specific program to help achieve your goals*.]{.underline} It is very helpful to mention a few specific professors that you would like to work with and why.
 
-#### [Research Statement]{.underline}
+Finally there are recommendation letters. You don't write them but you ask 3-4 people for them. These folks don't all have to be professors, but they do need to be able to talk about your achievements and work you've done. Examples can be professors you worked with at an REU, an academic advisor you've developed a relationship with, or a professor who's class you took or TA'd. You want to make sure that you ask them well in advance of the deadlines (around two-three months) and keep track of them! Some folks might take a while to respond (more than four weeks with one or two follow-ups), which should be viewed as a soft no. But for those that do agree, you should assume you are in charge of making sure they get it in on time. Send one or two reminders as the deadline approaches and check in the application portal to make sure the email is correct.
 
-#### [Application fees]{.underline}
+*Note that some applications might now have you do a diversity statement as well, where you can draw on your own life and talk about outreach you might do and contribute to the diversity in the program and field. Also check out my "personal graduate guide" to see my SOPs for which I was accepted.*
+
+#### [the unspoken rules]{.underline}
+
+So in your SOP, you've mentioned some professors that you would like to work with. But, this should not be the first time they've seen your name! [**At least three-four months before you apply to an institution, you should reach out to a few faculty about chatting with them about their research.**]{.underline} This can help in many ways:
+
+1.  Serves as a vibe-check. This would be your advisor for at least five years. Do they seem nice? Did they seem interested in chatting with you?
+2.  They get to know you. They see that you are interested and are wanting and willing to chat with them.
+
+Also don't be afraid to talk to people about your application process! Let your academic or research advisors know, let your professors know, they might be able to connect you with someone they know that they think would be a good fit or offer additional advice.
+
+*Note that some programs will not recommend you chatting with professors but it cannot hurt to reach out, especially in lab-admit programs where there is no rotation aspect (i.e. you don't try out many different labs).*
+
+#### [application fees]{.underline}
+
+There are also application fees, but there might be ways to get waivers for them.
+
+-   Try to go to the [SACNAS](https://www.sacnas.org) conference the semester you are applying to grad school. This would mean applying the summer before either as an attendant or as a participant where you could present research you are working on! Hopefully the lab you are working with could help sponsor, but if not check to see if your undergrad institution offers conference funding and SACNAS often offers a travel scholarship. Once you are there, you should have a list of schools you are applying to. There will be a bunch of booths of these universities at SACNAS. Find them and ask if they have any fee waivers. This is also a great time to ask them questions! *See some example questions in the following section and also in my "personal grad school guide."*
+-   Email the graduate admissions officer or look around on the website to see if there are any opportunities for fee waivers. Often these are for folks who attended an REU, belong to an affinity group, and/or demonstrate financial need.
+
+#### [be organized]{.underline}
+
+There's a lot to gather. There are professors to email, applications to write, recommendation letters to request, and deadlines to meet. Figure out what way would help you best in getting organized (spreadsheet, Google Calendar, etc.). *I have an example spreadsheet in "Additional resources."*
 
 ### Questions to ask during the process
 
@@ -75,8 +108,8 @@ One of the biggest things about applying to graduate school for me was that ther
 
 ### Additional resources
 
--   [My personal graduate school guide](https://drive.google.com/drive/folders/1zoIaaxZyMZrlKQ0_yzsQLxw1ViR5d2on?usp=sharing) containing my SOPs, GRFPs, spreadsheets, and list of questions, among other things.
+-   [My personal graduate school guide](https://drive.google.com/drive/folders/1zoIaaxZyMZrlKQ0_yzsQLxw1ViR5d2on?usp=sharing) containing my SOPs, GRFPs, an organizational spreadsheet, and list of questions, among other things.
 
--   [Demystifying the Graduate School Application Process](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/bes2.2029), a paper published by folks from UC Berkeley's Environmental Science, Policy, & Management Department.
+-   [Demystifying the Graduate School Application Process](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/bes2.2029), a paper published by folks from UC Berkeley's Environmental Science, Policy, & Management Department demystifying some of the unspoken rules of academic.
 
 -   [Workshop packet on applying to graduate school](https://drive.google.com/drive/folders/1CdRlb8cj_e65zBAI9JXOdnQCtODPXFVM?usp=sharing), put together by UC Berkeley's Environmental Science, Policy, & Management Graduate Diversity Council and the Plant and Molecular Biology department.
