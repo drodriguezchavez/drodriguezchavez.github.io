@@ -102,7 +102,7 @@ However two questions immediately arise once we start to deal with more complica
 1.  How do I calculate derivatives for more complicated distributions (and do I have to)?
 2.  What happens if you have more than one or two parameters?
 
-Both of these questions can be answered the same: optimization! In reality, no pencil-and-paper differentiation is used. Your regular linear regression in R uses these techniques to find the intercept and slope of the regressions. Then, there are other packages such as *nimble* that use a method called MCMC under a Bayesian framework that will return to you parameter estimates using the same principles as defined here, but it can be much harder to imagine, for example, a 4d space, so it's nice that they can do it for us! If you're interested, I have a blog post on MCMC right [here](mcmc.qmd).
+Both of these questions can be answered the same: optimization! In reality, no pencil-and-paper differentiation is used. Your regular linear regression in R uses these techniques to find the intercept and slope of the regressions. Then, there are other packages such as *nimble* that use a method called MCMC under a Bayesian framework that will return to you parameter estimates using the same principles as defined here, but it can be much harder to imagine, for example, a 4d space, so it's nice that they can do it for us!
 
 ## other notes
 

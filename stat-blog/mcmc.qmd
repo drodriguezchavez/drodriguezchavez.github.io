@@ -1,7 +1,0 @@
----
-title: "Monte Carlo Markov Chains (MCMC)"
-date: 08/14/2024
-Keywords: "MCMC, maximum likelihood, optimization"
----
-
-MCMC
