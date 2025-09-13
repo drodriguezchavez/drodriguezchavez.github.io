@@ -1,0 +1,43 @@
+---
+title: "Musical Theater"
+linkcolor: purple 
+title-block-banner: images/musical-theater-2.png
+title-block-banner-color: white
+include-in-header:
+  - text: |
+      <style>
+      .quarto-title-block .quarto-title-banner {
+        background-position-y: center;
+        height: 200px;
+      }
+      </style>
+---
+
+#### **Recent Shows I've Seen**
+
+Just came back from the Edinburgh Fringe!
+
+#### **Recent Shows I've Been In**
+
+UPCOMING FALL 2025: [*Cantos de Mi Tierra*](https://cabaretlatinocantosdemitierra.com) at Martuni's Piano Bar, A Musical Theater Revue at [Berkeley Playhouse](https://tickets.berkeleyplayhouse.org), [Unplugged Cabaret](https://korsamt.org/2025-2026/) at The Live Oak Theater.
+
+-   August 2025: [*The Family Copoli*](https://thefamilycopoli.com) at TheSpaceUK on Niddry St. at the Edinburgh Fringe Festival
+-   Spring 2025: [*Cantos de Mi Tierra*](https://cabaretlatinocantosdemitierra.com) at Martuni's Piano Bar and [*Into the Woods Act One*](https://korsamt.org/current-season/) at The Live Oak Theater
+-   November 2024: A Musical Theater Revue at [Berkeley Playhouse](https://tickets.berkeleyplayhouse.org)
+-   June 2024: [*Baby Rock*](https://www.hollywoodfringe.org/projects/10500?tab=details) at the Hollywood Fringe Festival
+-   May 2024: *Just My Type* at [Chanticleer's Theatre](https://www.chanticleers.org)
+-   Oct-Nov 2023: *Tintypes* at [Contra Costa Civic Theatre](https://www.ccct.org)
+-   May 2023: *Family Copoli* at Cornell University
+
+#### **Theaters I Recommend**
+
+There are a lot of great theaters in the Bay Area. Below is a small subset that I frequent. However, for a more full list checkout [Theatre Bay Area](https://www.theatrebayarea.org) or [my own personal list](https://docs.google.com/document/d/1GJsyDc-R5UueHKNIg0VxwXyYjCFLqCkXAYSWuNblP0s/edit?usp=sharing) (where you can see which shows I'm planning on attending).
+
+-   **The Orpheum, Golden Gate Theater, Curran Theatre**. These are all easily accessible by BART at show touring Broadway shows. Check out [NightOutNightOff](https://www.nightoutnightoff.org) for cheaper tickets to these shows.
+-   **The Gateway Theatre**. Easily accessible by BART and have cheap tickets on TodayTix.
+-   **Berkeley Playhouse.** Easily accessible by AC Transit and very close to campus.
+-   **Berkeley Rep**. Easily accessible by BART. Does incredible shows but can get a little pricey. Try the Tuesday 12pm ticket releases for \$20 tickets.
+-   **Shotgun Players**. Easily accessible by BART and AC Transit. Tend to have very community engaging shows.
+-   **San Francisco Playhouse.** Easily accessible by BART. Really great quality and somehow manages to do during the week shows (except Mondays). Highly recommend their \$20 rush tickets which open 30min before show.
+
+#### 

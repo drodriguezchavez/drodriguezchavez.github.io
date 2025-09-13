@@ -1,0 +1,41 @@
+---
+title: "Distributions"
+date: 09/03/2024
+Keywords: "Statistical distributions"
+---
+
+Learning statistics is a language, and for me, learning the distributions is like learning the grammar. Once you get the reasons for why the distributions are what they are (and why the have the form they do), it simplifies the mystery of why we use certain distributions for certain problems (and if you do Bayesian inference, it can help inform you of what priors you want to use).
+
+### *Discrete*
+
+Bernoulli: What is the probability I get one success with only one trial?
+
+Binomial: Let's expand on the Bernoulli distribution. What is the probability I get k successes in n trials?
+
+Geometric: Let's also expand on the Bernoulli distribution, except now I only care about the first success in many trials until I stop. What is the probability a success occurs on the kth trial?
+
+Negative Binomial: Let's expand on the Geometric distribution now because I want to end on a certain number of successes. What is the probability r number of successes finishes accruing on the kth trial? *Note that the Poisson distribution is a special case of this*.
+
+Hypergeometric: What if I have a finite number of successes to find. What is the probability that I find k successes out of r total successes, where each time I remove a success I cannot sample it again (i.e. no replacement).
+
+Poisson: Let's push the Binomial distribution to its limit. What is the probability of k events happening in a given interval of time given a rate $\lambda$? *Note that for really large n and really small p, the Poisson frequency function can be used instead of the binomial.*
+
+### *Continuous*
+
+Uniform: What if there is an equal chance for each probability to arise? *Note that this is a special case of the Beta distribution.*
+
+Exponential: Let's expand on the Poisson. What is the probability that another event doesn't occur in a given time interval? *Note that this is a special case of the gamma distribution.*
+
+Gamma: shape rate, used for survival times along with the Weibull distribution
+
+Normal: Useful for modeling random error or data that is centered around a mean.
+
+Beta: Useful for modeling random variables that are restricted to the interval \[0, 1\].
+
+A **copula** is a joint cumulative distribution function of random variables that have uniform marginal distributions. This construction points out that from the ingredients of two marginal distributions and any copula, a joint distribution with those marginals can be constructed. It is thus clear that the marginal distributions do not determine the joint distribution. *Remember that if y =* $F_x(X)$, then y is a uniform distribution.
+
+**convolutions**: given joint frequency function p(x,y) and x and y are indep. if we have Z + X+Y, we can rearrange our joint distribution to get the cdf and then the pdf of Z.
+
+Under the assumptions just stated, the joint density of U and V is fUV(u,v)= fXY(h1(u,v),h2(u,v))\|$J^{-1}$(h1(u,v),h2(u,v))\| for (u,v) such that u = g1(x,y) and v = g2(x,y) for some (x,y) and 0 elsewhere.
+
+papers: Perry: Marti Anderson copulas, Perry 2014.
