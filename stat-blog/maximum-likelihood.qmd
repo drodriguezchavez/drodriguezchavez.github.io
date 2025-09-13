@@ -1,0 +1,113 @@
+---
+title: "Maximum Likelihood"
+date: 08/05/2024
+Keywords: "MLE, distribution, regression"
+---
+
+```{r, echo = FALSE, include = FALSE}
+library(tidyverse) 
+library(ggplot2)
+library(latex2exp)
+```
+
+To start, let's do the first thing many do when trying to learn about a new topic: go to the [Wikipedia page](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation) for it. Let's start with that first paragraph:
+
+*In statistics,* *maximum likelihood estimation (MLE) is a method of estimating the **parameters** of an **assumed probability distribution**, given some **observed data**. This is achieved by maximizing a **likelihood function** so that, under the assumed statistical model, the observed data is most probable. The point in the **parameter space** that maximizes the likelihood function is called the [maximum likelihood estimate]{.underline}. The logic of maximum likelihood is both intuitive and flexible, and as such the method has become a dominant means of statistical inference. (Taken directly from Wikipedia.)*
+
+Hopefully if it's not intuitive as of yet, it will be once we work through this. Let's break down this first paragraph into various components: **parameters**, **assumed probability distribution**, **observed data**, **likelihood function**, and **parameter space**.
+
+Let's first take about the **assumed probability distribution**. This is the type of distribution you *assume* your data is coming from. For example, for count data, we often use the Poisson distribution, denoted $$ Pois(\lambda) = \frac{\lambda^k e^{-\lambda}}{k!} $$ where $k$ is the number of events that occur in an interval given by rate $\lambda$.
+
+In the above example, $\lambda$ is what we call a **parameter**. This is a value that describes, in a Frequentist sense, the "true value" of your population.
+
+```{r, echo = FALSE}
+vals <- seq(0,50,1)
+
+ggplot() +
+  ggtitle('Examples of Poisson distributions') +
+  geom_line(aes(x = vals, y = dpois(vals, lambda = 2), color = "2")) + 
+  geom_line(aes(x = vals, y = dpois(vals, lambda = 4), color = '4')) +
+  geom_line(aes(x = vals, y = dpois(vals, lambda = 8), color = '8')) +
+  geom_line(aes(x = vals, y = dpois(vals, lambda = 16), color = '16')) +
+  geom_line(aes(x = vals, y = dpois(vals, lambda = 32), color = '32')) +
+  labs(x = "Counts", y = expression(Pr(K == k))) + 
+  scale_color_manual(name = expression(lambda),
+                     breaks = c("2", "4", "8", "16", "32"),
+                     values = c("2" = "red", "4" = "orange", 
+                                "8" = 'green', "16" = "blue", "32" = "purple")) 
+
+```
+
+Often, we are trying to figure out what the best parameter value fit for our data is, to try and get at the "true value" of where our data comes from. Say you want to know the average amount of chicks in a clutch laid by the [Black-crowned Night Heron](https://www.allaboutbirds.org/guide/Black-crowned_Night_Heron/id#) in your neighborhood (which are found aplenty in Lake Merritt, a home to many a [strange creature](https://baynature.org/biodiversity/enigmatica/)). The most obvious way to do this, would be to measure all of the chicks in each clutch! Then you would get the "true value" of the population mean. But, you realistically can't measure all of the baby birds in the area. That's a lot of time and patience, as well as luck that you simply don't have. But! You do have a couple of Night Heron clutches that you found lying around, so you counted the amount of chicks in each of those. So this is your **observed data**. You then use this data to figure out what your best guess for a parameter would be.
+
+```{r, echo = FALSE}
+set.seed(2)
+clutch <- c('Clutch 1', 'Clutch 2', 'Clutch 3', 'Clutch 4', 'Clutch 5',
+            'Clutch 6', 'Clutch 7', 'Clutch 8', 'Clutch 9', 'Clutch 10')
+size <- rpois(10, lambda = 5)
+dat <- as.data.frame(size, clutch);dat
+```
+
+Now, let's do some *assuming* here (the Frequentist view). Because we can only have a non-negative number of baby chicks and they are integers (you can't have 0.1 of a baby chick) let's *assume* that the clutch sizes come from the Poisson distribution, the one we mentioned earlier. Let us also *assume* that each clutch is **independent and identically distributed**, meaning that each clutch size does not depend on another and we *assume* that all come from the same distribution.
+
+```{r, echo=FALSE}
+ggplot() + 
+  geom_point(aes(x = 1:10, y = dat$size), size = 4) + 
+  ylim(c(0,10)) +
+  xlab("Clutch #") + 
+  ylab("Size of each clutch") + 
+  scale_x_continuous(breaks = 1:10) + 
+  ggtitle("Visualizing the size of each clutch")
+
+```
+
+Great, but so what? We have decided that the **observed data** come from a Poisson **distribution**, but we still need to find the actual **parameter** $\lambda$ for this species. Well, luckily, because we've assumed our data is **independent and identically distributed**, we can treat each point (i.e. each clutch size) as independent events. Now, statistics is cool and has the rule that if $A$ and $B$ are the probabilities of two independent events, then the probability of both happening is $A*B$ (think of how the probability of getting two heads after two fair coin flips is $0.5*0.5$ because the probability of getting heads is $0.5$ and each fair coin flip is independent of any other fair coin flip).
+
+So, keeping that rule in mind, we can get the probability that these 10 clutch sizes would happen by multiplying the probability of each one. Now, you might be thinking, we don't know the probability of each one. But we do! Kind of. We know that they come from the Poisson **distribution**. Which is $$ Pois(\lambda) = \frac{\lambda^k e^{-\lambda}}{k!} $$
+
+Now, I know what you're thinking: we still don't know $\lambda$! And this is true. But, when we multiple all of these together with our various $k$ (i.e. our **observed data**, which is our clutch sizes), we will have a **probability** **function** from our data that relies on $\lambda$. As we test different $\lambda$, we will get different values.
+
+$$f(\lambda) = \Pi_1^n \frac{\lambda^{k_i} e^{-\lambda}}{k_i!}$$
+
+*Note that* $\Pi$ *just means to multiply values together, much like how* $\Sigma$ *adds items together.* $n$ *is our number of data points and* $k_i$ *represents a single data point value.*
+
+As we know, the higher the number from a probability function, the more probable it is for that scenario or set of conditions to happen. In this case, we want to find the value of **parameter** $\lambda$ from our **function** we have just created, that is the most **likely**. Can you guess the official name of our function now? It's the **likelihood function**! *Note that for computational reasons, you will often see the log scale version of this.*
+
+$$L(\lambda) = \sum_1^n (log(\lambda^{k_i}) + log(e^{-\lambda}) - log(k_i!)) $$ $$ = \sum_1^n (k_i *log (\lambda) -\lambda - log(k_i!) )$$ Plugging in a few values, we see a general curve appear below!
+
+```{r, echo = FALSE}
+llh <- function(lambda) {
+  # remember that R does log-linear, so lambda is actually exp(lambda)
+  (sum(dat$size*log(lambda))) - length(dat$size)*lambda - sum(log(factorial(dat$size))) 
+}
+lik_vals <- c(llh(3), llh(3.5), llh(4), llh(4.5), llh(5), llh(5.5), llh(6), llh(6.5), llh(7), llh(7.5), llh(8))
+plot(seq(3, 8, 0.5), lik_vals, pch = 19, ylim = c(-35, -20),
+     xlab = expression(lambda), ylab = expression(L(lambda))) 
+```
+
+This graph above is a visualization of what we call the **parameter space**. We are seeing where the maximum is along a set of guess parameter values. Looking at our log-**likelihood function** above (or surface if it's two parameter values, such as in the normal distribution), we see that a $\lambda$ value of around 5.5 might be the maximum.
+
+Unsatisfied with this? Is there a way to get the exact maximum without just looking at the graph and guessing? If you ever took calculus, you'll remember that to find the maximum of a function, you can take the derivative of the function, set it to 0, and find the parameter value that satisfies that equation.
+
+$$ L'(\lambda) = \sum_1^n (\frac{k_i}{\lambda} - 1) = 0 $$
+
+$$ \sum_i^n k_i/n = \hat{\lambda} $$
+
+Which in our case does equal 5.5! *Note that the hat on* $\lambda$ *is used to denote it as an estimator.*
+
+We can now happily complete our inquiry and be confident that our birds are likely delivering on average a clutch size of 5.5/year, Poisson distributed. *But this isn't an integer*, you may be inclined to say. Well, $\lambda$ is an average. If you saw two dogs one day and then three dogs the next, you would be seeing an average of 2.5 dogs a day even though it's physically impossible (or just really sad) to see half a dog!
+
+However two questions immediately arise once we start to deal with more complicated data and distributions.
+
+1.  How do I calculate derivatives for more complicated distributions (and do I have to)?
+2.  What happens if you have more than one or two parameters?
+
+Both of these questions can be answered the same: optimization! In reality, no pencil-and-paper differentiation is used. Your regular linear regression in R uses these techniques to find the intercept and slope of the regressions. Then, there are other packages such as *nimble* that use a method called MCMC under a Bayesian framework that will return to you parameter estimates using the same principles as defined here, but it can be much harder to imagine, for example, a 4d space, so it's nice that they can do it for us!
+
+## other notes
+
+**What is Frequentist vs. Bayesian?** This is a great rabbit hole to dive into! My general understanding is that a Frequentist viewpoint comes from the idea that there is a "true" parameter value that is fixed and we are trying to uncover from our observed data. The Bayesian framework comes from the idea that our parameter values themselves are random variables that come from a distribution, which we can specify (this is called your prior distribution) to hopefully gain a better understanding of where the data comes from. *Recommended reading: Statistical Modeling: The Two Cultures by Breiman (2001) and Bayesians, Frequentists, and Scientists by Efron (2005).*
+
+**But the real world isn't independent and identically distributed!** Now there are a lot of assumptions in statistics and this took me a while to get used to. It's a very different language to learn. What helped me "buy into the system," so to speak, is to really take in the quote *"all models are wrong, but some are useful."* Statistics does not describe the real world down to every blade of grass, but it can help us to uncover trends and give us the best tool we have to estimate parameters that have very real implications in fields such as healthcare and the environment (i.e. setting thresholds of toxicity, etc.). *Recommended reading: Data Detective by Tim Harford.*
+
+**I still have thoughts and questions!** Feel free to let me know how I can improve this post with other resources by clicking the mailbox icon at the bottom :)
