@@ -1,7 +1,7 @@
 ---
 title: "Online Resources"
 date: 05/14/2024
-Keywords: "YouTube, independent learning, calculus, statistics"
+Keywords: "YouTube, independent learning, mathematics, statistics"
 ---
 
 It took me a very long time to become comfortable with using anything other than my textbook and notes when learning concepts in school. However, I've learned that I best understand something when I can visualize it and clearly write out all the steps. Because of this, YouTube has been an amazing resource, as well as other online sources where I can see how other people interpret and explain these concepts.
