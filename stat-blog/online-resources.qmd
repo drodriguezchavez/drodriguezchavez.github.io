@@ -12,6 +12,8 @@ It took me a very long time to become comfortable with using anything other than
 
 -   [Very Normal](https://www.youtube.com/@very-normal) – This is an amazing YouTube channel (that also has a substack of the same name) by recent Ph.D graduate Christian. Really clear and well-animated videos of many different statistical concepts, this channel has helped me a lot!
 
+-   [Statistics for Ecologists](https://statistics4ecologists-v3.netlify.app) - Written by John Fieberg at the University of Minnesota, this is an amazing textbook with a lot of practical exercises. I went through the whole book and it helped me gain a good foundation of statistical modeling.
+
 -   [Primer](https://www.youtube.com/@PrimerBlobs) - Though they rarely make videos, Primer is a YouTube channel with great animations that explains some basic statistical concepts.
 
 -   [Numberphile](https://www.youtube.com/@numberphile/videos) - This is a great YouTube channel to see professors and mathematicians explain problems in real time. Rarely any animations, it's a lot of pen to paper explaining and working through a problem.
