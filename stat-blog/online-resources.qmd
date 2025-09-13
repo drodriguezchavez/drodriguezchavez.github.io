@@ -1,19 +1,19 @@
 ---
 title: "Online Resources"
-date: 05/14/2024
-Keywords: "YouTube, independent learning, mathematics, statistics"
+date: 09/13/2025
+Keywords: "independent learning, mathematics, statistics"
 ---
 
 It took me a very long time to become comfortable with using anything other than my textbook and notes when learning concepts in school. However, I've learned that I best understand something when I can visualize it and clearly write out all the steps. Because of this, YouTube has been an amazing resource, as well as other online sources where I can see how other people interpret and explain these concepts.
 
 -   [3blue1brown](https://www.3blue1brown.com) - Originally a YouTube channel created by Grant Sanderson, 3blue1brown is a great resource for learning any type of maths with intuitive visualizations. In addition, he will sometimes do one-off videos on cool concepts in mathematics and has know started having guest videos!
 
--   [Primer](https://www.youtube.com/@PrimerBlobs) - Though they rarely make videos, Primer is a YouTube channel with
+-   [Paul's Online Math Notes](https://tutorial.math.lamar.edu) - Paul's Online Math Notes helped me a lot in high school to learn calculus as well as differential equations. With clear explanations and also so practice problems with solutions, it's a resource that I sometimes go back to if I want to brush up on foundations of mathematics.
 
--   Flammable Maths -
+-   [Very Normal](https://www.youtube.com/@very-normal) – This is an amazing YouTube channel (that also has a substack of the same name) by recent Ph.D graduate Christian. Really clear and well-animated videos of many different statistical concepts, this channel has helped me a lot!
 
--   Numberphile -
+-   [Primer](https://www.youtube.com/@PrimerBlobs) - Though they rarely make videos, Primer is a YouTube channel with great animations that explains some basic statistical concepts.
 
--   [Paul's Online Math Notes](https://tutorial.math.lamar.edu) - Paul's Online Math Notes helped me a lot in high school to
+-   [Numberphile](https://www.youtube.com/@numberphile/videos) - This is a great YouTube channel to see professors and mathematicians explain problems in real time. Rarely any animations, it's a lot of pen to paper explaining and working through a problem.
 
--   Very Normal – <https://verynormal.substack.com>
+-   [Flammable Maths](https://www.youtube.com/@PapaFlammy69/videos) - Though 2025 is his last year on YouTube, this is a fun channel solving math problems from algebra to calculus.
