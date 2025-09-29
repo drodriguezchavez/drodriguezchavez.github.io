@@ -325,7 +325,7 @@ sqrt(vcov(lm.fit)[2,2])
 
 We see that they match! Neat! 
 
-### Calculating our test statistic and evaluating our hypothesis test 
+### Calculating our test statistic
 
 Now that we have our $\hat{\beta_1}$ and our $SE(\hat{\beta_1})$, we can now construct our test statistic and evaluate it. 
 
@@ -355,25 +355,58 @@ A probability distribution is a function that gives the probabilities of an even
 4. **rdistr**: r is for random and generates a random value from the given distribution. 
 
 ```{r}
-plot(seq(-3, 3, 0.01), dnorm(seq(-3, 3, 0.01), 0, 1), pch = 20)
-points(rnorm(50, 0, 1), rep(0, 50), pch = 20, col = 'red')
+plot(seq(-3, 3, 0.01), dnorm(seq(-3, 3, 0.01), 0, 1), cex = 0.5)
+# plotting the area under the curve for what pnorm(2) is
+polygon(c(seq(-3, qnorm(0.977), 0.01), rev(seq(-3, qnorm(0.977), 0.01))),
+        c(rep(0, length(seq(-3, qnorm(0.977), 0.01))), rev(dnorm(seq(-3, qnorm(0.977), 0.01), 0, 1))),
+        col = 'gray', border = NA)
+# plotting the value of N(0, 1) at P(x = 2)
 points(2, dnorm(2, 0, 1), pch = 19, col = 'green') 
+# plotting that given the value of x such that the cumulative probability is 0.977
 points(qnorm(0.977, 0, 1), 0, pch = 19, col = 'blue')
-
+# plotting 50 random variables drawn from a N(0, 1)
+points(rnorm(50, 0, 1), rep(0, 50), pch = 20, col = 'red')
 ```
+
+### Evaluating the test statistic
+
+In our case, we want to find what the probability of getting a value that is equal to or more extreme than the test statistic value *given that the null hypothesis is true*. This is know as our **p-value**. 
+
+Let's look at this in R. 
 
 ```{r, calculating the p-value}
 # # we should get the same estimates of the t-value and p-value from the lm
-# 2*(1-pt(abs(beta0_hat/beta0_SE), N-2)) # beta0_hat/beta0_SE is the t-value 
-# 2*(1-pt(abs(beta1_hat/beta1_SE), N-2)) # or 2*pt(beta1_hat/beta1_SE, N-2), so we do abs() to account
+p.val <- 2*(1-pt(abs(test.statistic), N-2)) # or 2*pt(beta1_hat/beta1_SE, N-2), so we do abs() to account
+p.val
+
+# checking with the linear model fit
+summary(lm.fit)[4]
+
+# let's plot this!
+plot(seq(-8, 8, 0.01), dt(seq(-8, 8, 0.01), N-2), cex = 0.2)
+# plotting that given the value of x such that the cumulative probability is our p-value
+points(qt(p.val, N-2), 0, pch = 19, col = 'blue')
+# we also care about the other extreme end
+points(1-qt(p.val, N-2), 0, pch = 19, col = 'red')
 
 ```
 
-Confidence intervals, p-values, linear least squares.
+An easy question to follow this, is why do we multiply by two above? In this formulation of our hypothesis test, we have a two-tailed test. We are assuming that $\beta_1 = 0$ and seeing if it $\neq 0$ as opposed to just $>$ or $<$. Therefore, we have to consider the probability that it is far greater than 0 or far less than 0. In the graph above, we care about the area under the curves to the left of the blue point and to the right of the red point. 
+
+### How good is this value to reject our null hypothesis? Is there a set of values?
+
+Ideally before going through all of this, you will have chosen a threshold value, $\alpha$. This is the probability you are willing to reject the null hypothesis at. If your p-value lies below this threshold, then we would reject the null hypothesis. If it is above, we simply do not reject the null hypothesis. *This does not mean the null hypothesis is true, it simply means you do not have a set of data / model that is able to reject the null.* 
+
+We can also construct an interval such that there is a $(1-\alpha)$% probability that the interval would contain the true parameter. This is called the **confidence interval** for the value. 
+
+$$
+
+$$
+
 
 How are test statistics and confidence intervals related?
 
-### Looking at additional information
+### Looking at additional information ($R^2$ and the F-statistic)
 
 $R^2$
 
