@@ -430,10 +430,6 @@ $R^2$
 # 2*(1-pf(abs(SSR/(SSE/(N-2))), 1, N-2)) # like the t-dist, SSR/(SSE/(N-2)) is the f-statistic
 ```
 
-### For future
-
--   Bernoulli/Binomial distributions, Poisson distributions, interactions
-
 ### Additional resources
 
 -   On matrix properties: https://www.ucl.ac.uk/\~ucahhwi/MATH6502/handout9.pdf
