@@ -133,6 +133,30 @@ lines(Xi, X.matrix%*%betas)
 Looks good! So to recap, we now have our beta estimates for our linear regression.
 
 ### Wait, but what about our variance?
+Note that the variance of $Y$ is the variance of the residuals. Because we've assumed that each observation is independent and identically distributed, we will have a variance-covariance matrix that is a diagonal matrix with just $\sigma^2$ along the diagonal. 
+
+$$
+\begin{align}
+Var(Y) &= Var(X\vec{\beta}+\vec{\epsilon})
+\\\\ &= Var(X\vec{\beta}) + Var(\vec{\epsilon}) + 2Cov(X\vec{\beta}, \vec{\epsilon})
+\\\\ &= Var(\vec{\epsilon})
+\\\\ &= \sigma^2*I
+\end{align} 
+$$ 
+
+<!-- \\\\ &= Var[(I-H)Y] -->
+
+<!-- \\\\ &= (I-H)Var(Y)(I-H)^T -->
+
+<!-- \\\\ &= (I-H)Var(\vec{\epsilon})(I-H)^T -->
+
+<!-- \\\\ &= (I-H) \sigma^2 (I-H)^T -->
+
+<!-- \\\\ &= \sigma^2 (I-H) -->
+
+<!-- \end{align} -->
+
+<!-- There were many jumps here. The first is just using properties of variance decomposition. Then we recall that the variance of true values (like $\beta$) are 0 and that we have made an assumption that $X$ is uncorrelated with $\epsilon$. Next, we note that there is a property that given a vector $v$ and a matrix $X$, $Var(Xv) = X*Var(v)*X^T$. Finally, the properties of the hat matrix are that $(I-H) = (I-H)^T$ (called being symmetric) and $H^TH = H$ so therefore $(I-H)^T(I-H) = I-H$. -->
 
 Recall that our variance $\epsilon_i \sim N(0, \sigma^2)$. How do we estimate $\sigma^2$?
 
@@ -147,32 +171,6 @@ Y_i &= \beta_0 + \beta_1 * X_i + \epsilon_i
 \\\\ &= (I- H)Y
 \end{align}
 $$ So now we have a way of getting the residuals from our hat matrix! However, we still need to find way to estimate $\sigma$.
-
-<!-- $$ -->
-
-<!-- \begin{align} -->
-
-<!-- Var(Y) &= Var(X\vec{\beta}+\vec{\epsilon}) -->
-
-<!-- \\\\ &= Var(X\vec{\beta}) + Var(\vec{\epsilon}) + 2Cov(X\vec{\beta}, \vec{\epsilon}) -->
-
-<!-- \\\\ &= Var(\vec{\epsilon}) -->
-
-<!-- \\\\ &= Var[(I-H)Y]  -->
-
-<!-- \\\\ &= (I-H)Var(Y)(I-H)^T -->
-
-<!-- \\\\ &= (I-H)Var(\vec{\epsilon})(I-H)^T -->
-
-<!-- \\\\ &= (I-H) \sigma^2 (I-H)^T -->
-
-<!-- \\\\ &= \sigma^2 (I-H) -->
-
-<!-- \end{align} -->
-
-<!-- $$  -->
-
-<!-- There were many jumps here. The first is just using properties of variance decomposition. Then we recall that the variance of true values (like $\beta$) are 0 and that we have made an assumption that $X$ is uncorrelated with $\epsilon$. Next, we note that there is a property that given a vector $v$ and a matrix $X$, $Var(Xv) = X*Var(v)*X^T$. Finally, the properties of the hat matrix are that $(I-H) = (I-H)^T$ (called being symmetric) and $H^TH = H$ so therefore $(I-H)^T(I-H) = I-H$. -->
 
 An intuitive way I like to think the variance, is that it quantifies how dispersed the data is from the mean. In other words, how far $Y_i$ is from $\beta_0 + \beta_1 * X_i$ averaged over the whole data set. Sound familiar? This is the same idea as our mean squared error equation from before. This quantity is often called **sum of squared errors** or **residual sum of squares**.
 
@@ -234,52 +232,137 @@ How do we come up with our test statistic? The idea is that this test statistic 
 
 *The Central Limit Theorem states that if one was to construct a sampling distribution of means from different samples of data, as the number of sample means gets larger, the sampling distribution approaches a normal distribution.*
 
-So now we have the solution to the least squares equations. We have a vector of $\hat{\beta}$'s, as well as an estimate for $s^2$. Now we need to which in turn gives us the standard error for the $\hat{\beta}$'s. How can we get this?
-
-$$
-\begin{align}
-a
-\end{align}
-$$
-
-```{r}
-# sigma.hat <- 
-
-# 
-# sigma.hat <- matrix(c(sigma.hat,0,0,sigma.hat), nrow = 2) # sigma*Identity matrix
-# C <- solve(t(X.matrix)%*%X.matrix)
-# 
-# # note that the residual standard error from lm should match these diagonals  
-# sqrt(sigma.hat)
-# 
-# # these should also match. ADD A DESCRIPTION AS TO WHY 
-# varcovar.matrix <- sigma.hat%*%C
-# varcovar.matrix
-# vcov(lm.fit) # compare with above 
-# 
-# # we should get the same estimates of the SE from the lm 
-# sqrt(varcovar.matrix[1,1])
-# sqrt(varcovar.matrix[2,2])
-```
+Thinking about this, we can state that $\beta_1$ will be normally distributed. Note that we also will have a sampling distribution for $\sigma^2$, which is $\chi^2$ distributed. 
 
 ### Quick general facts about some test-statistic distributions
 
 Note that there are test statistics that come from different distributions, but in general, we have the t-distribution, F-distribution, and $\chi^2$ distribution.
 
-### Calculating our test statistic!
+The **t-distribution** with $\nu$ degrees of freedom is defined as the distribution of a random variable $T$, where
+$$
+T = \frac{Z}{\sqrt{V/\nu}} = Z\sqrt{\frac{\nu}{V}} 
+$$
+Where $Z$ is standard normally distributed, $V$ has a $\chi^2$-distribution with $\nu$ degrees of freedom and $Z$ and $V$ are independent. The main usage of the t-distribution in this context is by testing the difference between two means and whether that difference is "significant" given a pre-determined threshold $\alpha$ or not. 
 
-Because in this case,
+The **F-distribution** is defined as 
+$$
+X = \frac{U_1/d_1}{U_2/d_2}
+$$
+where $U_1$ and $U_2$ are independent random variables with chi-square distributions with respective degrees of freedom $d_1$ and $d_2$. 
 
-```{r, calculating our test statistic and p-value}
+The **$\chi^2$ distribution** is defined as 
+$$
+X = \Sigma_{i=1}^k Z_i^2
+$$
+where $Z_i$ are independent, standard normal random variables. This distribution is often used in goodness of fit tests and likelihood-ratio tests for nested models, among other things. 
 
-# beta0_hat <- betas[1,1]
-# beta0_SE <- sqrt(varcovar.matrix[1,1])
-# beta1_hat <- betas[2,1]
-# beta1_SE <- sqrt(varcovar.matrix[2,2])
-# 
-# # beta2_hat <- lm.fit$coefficients[[3]]
-# # beta2_SE <- summary(lm.fit)$coefficients[, 2][[3]]
-# 
+### So what is our test statistic then? 
+
+We are testing for the probability that there is some sort of relationship between our $Y_i$ and $X_i$. We have assumed a null hypothesis, $H_A$ that states that $\beta_1 = 0$. This our assumed truth. So, if we take our sample $\hat{\beta_1}$, and we standardize it, we will get a value that tells us how far we are from our true $\beta_1$ (and note that this will be t-distributed!)
+
+$$
+T = \frac{\hat{\beta_1} - \beta_1}{SE(\hat{\beta_1})}
+$$
+And because in this hypothesis test, we are testing against $\beta_1 = 0$, this will simplify to 
+
+$$
+T = \frac{\hat{\beta_1}}{SE(\hat{\beta_1})}
+$$
+
+### Finding the standard errors 
+
+So now we have the solution to the least squares equations. We have a vector of $\hat{\beta}$'s, as well as an estimate for the variance, $s^2$. Now we need to find the standard error for the $\hat{\beta}$'s so we can create our hypothesis test test-statistic of $\beta_1 / SE(\beta_1)$ which we now know will be t-distributed. 
+
+We recall from up way above that $\vec{\beta} = (X^TX)^{-1}X^TY$. Also note this neat trick that given a matrix $A$ and vector $x$, $Var(Ax) = A*Var(x)*A^T$ and that given a symmetric matrix $A$, $A = A^T$ and $A^{-1}$ is also a symmetric matrix. In our case, we know that $X^TX$ is a symmetric matrix. 
+
+$$
+\begin{align}
+Var(\beta) &= Var((X^TX)^{-1}X^T Y)
+\\\\ &= (X^TX)^{-1}X^T * Var(Y) * ((X^TX)^{-1}X^T)^T
+\\\\ &= (X^TX)^{-1}X^T * \sigma^2 I * ((X^TX)^{-1}X^T)^T
+\\\\ &= \sigma^2 I * (X^TX)^{-1}X^T * ((X^TX)^{-1}X^T)^T
+\\\\ &= \sigma^2 I * (X^TX)^{-1}X^T * (X^T)^T ((X^TX)^{-1})^T
+\\\\ &= \sigma^2 I * (X^TX)^{-1}X^T * X ((X^TX)^{-1})^T
+\\\\ &= \sigma^2 I * (X^TX)^{-1} * (X^T X) * ((X^TX)^{-1})^T
+\\\\ &= \sigma^2 I * ((X^TX)^{-1})^T
+\\\\ &= \sigma^2 I * (X^TX)^{-1}
+\end{align}
+$$
+Now we only have estimates for some of these values, so in practice, we have that 
+$$
+Var(\hat{\beta}) = s^2 I * (X^TX)^{-1}
+$$
+Let's check this out in R.
+
+```{r, comparing our variance estimates}
+# getting our sigma estimate as before 
+sigma.hat <- sum((Yi - H%*%as.matrix(Yi))^2)/(N-2)
+
+# turning it into an diagonal matrix 
+sigma.hat <- matrix(c(sigma.hat,0,0,sigma.hat), nrow = 2) # sigma*Identity matrix
+
+# the matrix of residuals should be 
+sigma.hat %*% solve(t(X.matrix)%*%X.matrix)
+
+# checking with the linear model fit
+vcov(lm.fit) # compare with above 
+```
+
+
+We can also then check for the standard errors since the square root of the variance estimate should be the standard errors. 
+
+```{r, getting the standard errors}
+# estimated standard error for beta0
+sqrt( (sigma.hat %*% solve(t(X.matrix)%*%X.matrix))[1,1] )
+# estimated standard error for beta1
+sqrt( (sigma.hat %*% solve(t(X.matrix)%*%X.matrix))[2,2] )
+
+# SE from the linear model fit for beta0
+sqrt(vcov(lm.fit)[1,1]) 
+# SE from the linear model fit for beta0
+sqrt(vcov(lm.fit)[2,2]) 
+```
+
+We see that they match! Neat! 
+
+### Calculating our test statistic and evaluating our hypothesis test 
+
+Now that we have our $\hat{\beta_1}$ and our $SE(\hat{\beta_1})$, we can now construct our test statistic and evaluate it. 
+
+```{r, calculating our test statistic}
+# getting our derived variance covariance matrix 
+varcovar.matrix <- sigma.hat %*% solve(t(X.matrix)%*%X.matrix)
+
+# calculating our test statistic
+beta1_hat <- betas[2,1]
+beta1_SE <- sqrt(varcovar.matrix[2,2])
+test.statistic <- beta1_hat/beta1_SE
+```
+
+**How do we evaluate this test statistic?** 
+We know that it comes from a t-distribution and we want evaluate the probability that we would get a value as extreme or more. 
+
+### A small digression into probability distributions
+
+A probability distribution is a function that gives the probabilities of an event happening where $P(A \leq x \leq B) = \int_a^b f(x;\theta) dx$ (for a continuous distribution), where $\theta$ are the parameters that describe the probability distribution. In R, there are four different types of functions for probability distributions. These functions start with either d, p, q, or r.
+
+1. **ddistr**: d is for density and returns the value of $f(y;\theta)$, i.e. the value of the probability density function (continuous distributions) or probability mass function (discrete distributions) 
+
+2. **pdistr**: p is for probability and returns a value of $F(y;\theta)$, the cumulative distribution function. 
+
+3. **qdistr**: q is for quantile and returns a value from the inverse of $F(y; \theta)$ and is also known as the quantile function. 
+
+4. **rdistr**: r is for random and generates a random value from the given distribution. 
+
+```{r}
+plot(seq(-3, 3, 0.01), dnorm(seq(-3, 3, 0.01), 0, 1), pch = 20)
+# points(rnorm(50, 0, 1), 0, col = 'red')
+points(2, dnorm(2, 0, 1), pch = 19, col = 'green') 
+points(qnorm(0.977, 0, 1), 0, pch = 19, col = 'blue')
+
+```
+
+```{r, calculating the p-value}
 # # we should get the same estimates of the t-value and p-value from the lm
 # 2*(1-pt(abs(beta0_hat/beta0_SE), N-2)) # beta0_hat/beta0_SE is the t-value 
 # 2*(1-pt(abs(beta1_hat/beta1_SE), N-2)) # or 2*pt(beta1_hat/beta1_SE, N-2), so we do abs() to account
@@ -287,10 +370,6 @@ Because in this case,
 ```
 
 Confidence intervals, p-values, linear least squares.
-
-How do we estimate
-
-How does the Central Limit Theorem tie into this?
 
 How are test statistics and confidence intervals related?
 
@@ -329,4 +408,5 @@ $R^2$
 -   More on simple linear regression with matrices: https://www.stat.cmu.edu/\~cshalizi/mreg/15/lectures/13/lecture-13.pdf
 -   On a geometric interpretation: https://bookdown.org/ts_robinson1994/10EconometricTheorems/linear_projection.html
 - A nice video on explanation of variance: https://www.youtube.com/watch?v=x0rmUXWtSS8
+- more in depth video of the least square estimators: https://www.youtube.com/watch?v=D2ns91Vcs8U 
 
