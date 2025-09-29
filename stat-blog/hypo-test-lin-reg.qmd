@@ -356,7 +356,7 @@ A probability distribution is a function that gives the probabilities of an even
 
 ```{r}
 plot(seq(-3, 3, 0.01), dnorm(seq(-3, 3, 0.01), 0, 1), pch = 20)
-# points(rnorm(50, 0, 1), 0, col = 'red')
+points(rnorm(50, 0, 1), rep(0, 50), pch = 20, col = 'red')
 points(2, dnorm(2, 0, 1), pch = 19, col = 'green') 
 points(qnorm(0.977, 0, 1), 0, pch = 19, col = 'blue')
 
