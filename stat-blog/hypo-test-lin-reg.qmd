@@ -49,12 +49,11 @@ plot(Xi,Yi, pch = 16)
 
 **What's our goal in linear regression?** We have an independent variable $X_i$, and we want to see how it relates to our dependent variable $Y_i$ in this linear relationship, of an intercept and a slope. The intercept, $\beta_0$ is the average value of our outcome, $Y_i$ when all of our independent variables, or predictors, are set to 0. Our slope, on the other hand, can be understood as the magnitude of the change for the dependent variable given a 1 unit increase of the predictor (independent) variable.
 
-So, our goal is to minimize a line through all data $(X_i, Y_i)$, given our choice of $\beta_0$ and $\beta_1$. One way of thinking about how to do it is to turn it into a minimization problem. We want to minimize the distance between the line (our model-predicted values in a sense) and the data itself. If $Y_i$ is our dependent variable, then we can write $\hat{Y}_i = \beta_0 + \beta_1 * X_i$ as our model-predicted values (our line)! Thus, our goal is to minimize 
-$$ 
+So, our goal is to minimize a line through all data $(X_i, Y_i)$, given our choice of $\beta_0$ and $\beta_1$. One way of thinking about how to do it is to turn it into a minimization problem. We want to minimize the distance between the line (our model-predicted values in a sense) and the data itself. If $Y_i$ is our dependent variable, then we can write $\hat{Y}_i = \beta_0 + \beta_1 * X_i$ as our model-predicted values (our line)! Thus, our goal is to minimize $$ 
 min \space \Sigma_{i=1}^n (Y_i - [\beta_0 + X_i \beta_1])^2 
 $$
 
-### Let's take a quick dive into matrices for a second. 
+### Let's take a quick dive into matrices for a second.
 
 If we want to solve the least squares equations, it can be helpful to re-write our formula in terms of matrices. Let's imagine $Y_i$ as a vector, where each row $i$ containing one observation. Below, we can see the first 10 rows of the vector $Y_i$ from our simulation. This is our true data!
 
@@ -66,13 +65,11 @@ Our goal is to know find a single value for $\beta_0$ and a single value for $\b
 
 Let's re-write this line in matrix form such that for row $i$, we get that $\hat{Y}_i = \beta_0 + \beta_1 * X_i$. (I put a hat on $Y$ to showcase that it is an estimate and not a true value. It can also be known as our expected value of Y).
 
-Recalling our rules of matrices, we can re-write it as 
-$$ 
+Recalling our rules of matrices, we can re-write it as $$ 
 E[Y] = \hat{Y} = X\vec{\beta}
 $$
 
-where 
-$$ 
+where $$ 
 \begin{align}
 X &=  \begin{bmatrix} 1 & x_1 \\ 1 & x_2 \\ \vdots & \vdots \\ 1 & x_n  \end{bmatrix}
 \\\\
@@ -86,15 +83,13 @@ Note that $X$ in this context is called the design matrix! It is a $n \times p$ 
 
 Now we can rewrite the least squared equation (also known as the mean squared error) as $$ 
 min (Y - X \vec{\beta})^2 = \hat{\epsilon}^2
-$$ Note that we can re-write this as 
-$$
+$$ Note that we can re-write this as $$
 \begin{align}
 min (Y - X \vec{\beta})^2 & = min( (Y - X\vec{\beta})^T(Y - X\vec{\beta}) 
 \\\\ &= min (Y^TY - Y^TX \vec{\beta} - \vec{\beta}^T X^T Y + \vec{\beta}^T X^T X \vec{\beta})
 \\\\ &= min (Y^TY - 2\vec{\beta}^T X^T Y + \vec{\beta}^T X^T X \vec{\beta})
 \end{align}
-$$ 
-Because we know what $X$ and $Y$ are already, our goal is to find the right $\beta$'s to minimize this equation. So we differentiate and set the equation equal to 0 to find an inflection point (either a min or a max.)
+$$ Because we know what $X$ and $Y$ are already, our goal is to find the right $\beta$'s to minimize this equation. So we differentiate and set the equation equal to 0 to find an inflection point (either a min or a max.)
 
 $$ 
 \begin{align}
@@ -141,7 +136,7 @@ Looks good! So to recap, we now have our beta estimates for our linear regressio
 
 Recall that our variance $\epsilon_i \sim N(0, \sigma^2)$. How do we estimate $\sigma^2$?
 
-Adding on from the previous section, we have that our hat matrix is $H = X(X^T X)^{-1} X^T$. So we can rewrite the linear regression and then the errors as... 
+Adding on from the previous section, we have that our hat matrix is $H = X(X^T X)^{-1} X^T$. So we can rewrite the linear regression and then the errors as...
 
 $$ 
 \begin{align}
@@ -151,25 +146,35 @@ Y_i &= \beta_0 + \beta_1 * X_i + \epsilon_i
 \\\\ \vec{\epsilon} &= Y - HY
 \\\\ &= (I- H)Y
 \end{align}
-$$ 
-So now we have a way of getting the residuals from our hat matrix! However, we still need to find way to estimate $\sigma$. 
+$$ So now we have a way of getting the residuals from our hat matrix! However, we still need to find way to estimate $\sigma$.
 
 <!-- $$ -->
+
 <!-- \begin{align} -->
+
 <!-- Var(Y) &= Var(X\vec{\beta}+\vec{\epsilon}) -->
+
 <!-- \\\\ &= Var(X\vec{\beta}) + Var(\vec{\epsilon}) + 2Cov(X\vec{\beta}, \vec{\epsilon}) -->
+
 <!-- \\\\ &= Var(\vec{\epsilon}) -->
+
 <!-- \\\\ &= Var[(I-H)Y]  -->
+
 <!-- \\\\ &= (I-H)Var(Y)(I-H)^T -->
+
 <!-- \\\\ &= (I-H)Var(\vec{\epsilon})(I-H)^T -->
+
 <!-- \\\\ &= (I-H) \sigma^2 (I-H)^T -->
+
 <!-- \\\\ &= \sigma^2 (I-H) -->
+
 <!-- \end{align} -->
+
 <!-- $$  -->
 
 <!-- There were many jumps here. The first is just using properties of variance decomposition. Then we recall that the variance of true values (like $\beta$) are 0 and that we have made an assumption that $X$ is uncorrelated with $\epsilon$. Next, we note that there is a property that given a vector $v$ and a matrix $X$, $Var(Xv) = X*Var(v)*X^T$. Finally, the properties of the hat matrix are that $(I-H) = (I-H)^T$ (called being symmetric) and $H^TH = H$ so therefore $(I-H)^T(I-H) = I-H$. -->
 
-An intuitive way I like to think the variance, is that it quantifies how dispersed the data is from the mean. In other words, how far $Y_i$ is from $\beta_0 + \beta_1 * X_i$ averaged over the whole data set. Sound familiar? This is the same idea as our mean squared error equation from before. This quantity is often called **sum of squared errors** or **residual sum of squares**. 
+An intuitive way I like to think the variance, is that it quantifies how dispersed the data is from the mean. In other words, how far $Y_i$ is from $\beta_0 + \beta_1 * X_i$ averaged over the whole data set. Sound familiar? This is the same idea as our mean squared error equation from before. This quantity is often called **sum of squared errors** or **residual sum of squares**.
 
 $$
 \begin{align}
@@ -177,14 +182,13 @@ $$
 \\\\ &= \vec{\epsilon}^2 / (n-p)
 \\\\ &= \vec{\epsilon}^T\vec{\epsilon}/(n-p)
 \end{align}
-$$
-We use $s^2$ to denote the estimated variance. Note that the bottom part of the above derivation is just how we would write in matrix form from the definition of the residuals that we showed earlier. 
+$$ We use $s^2$ to denote the estimated variance. Note that the bottom part of the above derivation is just how we would write in matrix form from the definition of the residuals that we showed earlier.
 
-Why do we divide by $n-p$ and not just $n$ to average over the whole set? This is because we just have $n-p$ degrees of freedom. An intuitive way to think about this is that each data point you have gives you information. And the more parameters you estimate, the more you use up these information data points. 
+Why do we divide by $n-p$ and not just $n$ to average over the whole set? This is because we just have $n-p$ degrees of freedom. An intuitive way to think about this is that each data point you have gives you information. And the more parameters you estimate, the more you use up these information data points.
 
-*For example, imagine you have exactly two points and you want to conduct a linear regression. You need a minimum of those two data points to estimate an intercept and a slope. So if you had just one data point, you would not be able to use this type of model, and if you have more than two data points, what's left over gives you more freedom to better model your data with more information. This the general idea of degrees of freedom.*
+*For example, imagine you have exactly two points and you want to conduct a linear regression. You need a minimum of those two data points to estimate an intercept and a slope. So if you had just one data point, you would not be able to use this type of model, and if you have more than two data points, what's left over gives you more freedom to better model your data with more information. This the general idea of **degrees of freedom.***
 
-Let's again check this in r. 
+Let's again check this in R.
 
 ```{r, looking at the variance}
 # getting the hat matrix 
@@ -198,10 +202,45 @@ e.dot <- Yi - H%*%as.matrix(Yi)
 (t(e.dot)%*%e.dot)/(N-2) # just a vector of sigmas
 
 # looking at the variance from the linear model fit 
-
+as.numeric(summary(lm.fit)[6])^2 
 ```
 
-We see both
+We see both the sum and matrix method give the same thing and they match the linear model output from R! Note that we square the value from the linear model fit since that is just $\sigma$ which is the standard deviation (i.e. the square root of the variance).
+
+### Back to hypothesis testing
+
+But remember our goal: **to see if there is any linear relationship between our independent variable** $X_i$ **and our dependent variable** $Y_i$**.**
+
+We can formulate this into a hypothesis test. The general steps are
+
+1.  Create the null and alternative hypotheses.
+
+2.  Make an assumption about the processes that give rise to your data and choose a test statistic that will summarize the data that addresses this assumption. Note that this test statistic will come from a specific distribution. You can't mix and match test statistics with distributions. Test statistics, based on how they are formulated, will have certain distributions that they come from.
+
+3.  Decide a threshold or significance level, $\alpha$ such that if the probability of getting the test statistic that we have given our null distribution is as extreme or more, we reject the null hypothesis. This also known as the **p-value**.
+
+So what is our null and alternative hypothesis? We care if there is any linear relationship between our independent and dependent variables, i.e. if our slope is not 0. We can formulate this as 
+
+$$
+\begin{align}
+H_0 : \beta_0 = 0
+\\ H_A : \beta_1 \neq 0
+\end{align}
+$$
+
+How do we come up with our test statistic? The idea is that this test statistic will come from a distribution such that we will be able to evaluate if the probability of getting this value from this sample of data was extreme enough to either **reject** or **not reject** our null hypothesis, $H_A$. 
+
+*A short digression on the frequentist framework. The data that one has, $Y_i$ is viewed as a sample of a larger population. Because of this, we will never get the true, fixed values of $\beta_0$ and $\beta_1$. We can only do our best to approximate their values, $\hat{\beta_0}$ and $\hat{\beta_1}$. We can make the argument, that if were to sample our population a bunch of times (i.e. get a bunch of $Y_i$'s, we would then be able to construct a sampling distribution of different $(\hat{\beta_0}, \hat{\beta_1})$ pairings. Obviously this would take a lot of time and usually we don't necessarily have a cost or time-effective way to come up with a bunch of $Y_i$ samples. This is where the Central Limit Theorem comes in!* 
+
+*The Central Limit Theorem states that if one was to construct a sampling distribution of means from different samples of data, as the number of sample means gets larger, the sampling distribution approaches a normal distribution.*
+
+So now we have the solution to the least squares equations. We have a vector of $\hat{\beta}$'s, as well as an estimate for $s^2$. Now we need to which in turn gives us the standard error for the $\hat{\beta}$'s. How can we get this?
+
+$$
+\begin{align}
+a
+\end{align}
+$$
 
 ```{r}
 # sigma.hat <- 
@@ -222,12 +261,6 @@ We see both
 # sqrt(varcovar.matrix[1,1])
 # sqrt(varcovar.matrix[2,2])
 ```
-
-### Back to hypothesis testing
-
-So now we have the solution to the least squares equations. We have a vector of $\beta$'s, as well as an estimate for $\sigma$ which in turn gives us the standard error for the $\beta$'s.
-
-But remember our goal: our goal is to see if there is any linear relationship between our independent variable $X_i$ and our dependent variable $Y_i$. We can formulate this into a hypothesis test. The general steps are... 1. Create the null and alternative hypotheses. 2. Make an assumption about the processes that give rise to your data and choose a test statistic that will summarize the data that addresses this assumption. Note that this test statistic will come from a specific distribution. You can't mix and match test statistics with distributions. Test statistics, based on how they are formuulated, will have certain distributions that they come from. 3. Decide a threshold or significance level, $\alpha$ such that if the probability of getting the test statistic that we have given our null distribution is as extreme or more, we reject the null hypothesis. This also known as the **p-value**.
 
 ### Quick general facts about some test-statistic distributions
 
@@ -295,3 +328,5 @@ $R^2$
 -   More on the hat matrix: https://pj.freefaculty.org/guides/stat/Regression/RegressionDiagnostics/OlsHatMatrix.pdf
 -   More on simple linear regression with matrices: https://www.stat.cmu.edu/\~cshalizi/mreg/15/lectures/13/lecture-13.pdf
 -   On a geometric interpretation: https://bookdown.org/ts_robinson1994/10EconometricTheorems/linear_projection.html
+- A nice video on explanation of variance: https://www.youtube.com/watch?v=x0rmUXWtSS8
+
