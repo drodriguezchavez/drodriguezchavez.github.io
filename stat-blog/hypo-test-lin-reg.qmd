@@ -1,7 +1,7 @@
 ---
 title: "Simple Linear Regression and Hypothesis Testing"
 date: 09/24/2025
-Keywords: ""
+Keywords: "hypothesis testing, least squares, r"
 ---
 
 ```{r setup, include=FALSE}
