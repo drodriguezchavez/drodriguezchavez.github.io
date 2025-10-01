@@ -133,7 +133,8 @@ lines(Xi, X.matrix%*%betas)
 Looks good! So to recap, we now have our beta estimates for our linear regression.
 
 ### Wait, but what about our variance?
-Note that the variance of $Y$ is the variance of the residuals. Because we've assumed that each observation is independent and identically distributed, we will have a variance-covariance matrix that is a diagonal matrix with just $\sigma^2$ along the diagonal. 
+
+Note that the variance of $Y$ is the variance of the residuals. Because we've assumed that each observation is independent and identically distributed, we will have a variance-covariance matrix that is a diagonal matrix with just $\sigma^2$ along the diagonal.
 
 $$
 \begin{align}
@@ -142,7 +143,7 @@ Var(Y) &= Var(X\vec{\beta}+\vec{\epsilon})
 \\\\ &= Var(\vec{\epsilon})
 \\\\ &= \sigma^2*I
 \end{align} 
-$$ 
+$$
 
 <!-- \\\\ &= Var[(I-H)Y] -->
 
@@ -217,7 +218,7 @@ We can formulate this into a hypothesis test. The general steps are
 
 3.  Decide a threshold or significance level, $\alpha$ such that if the probability of getting the test statistic that we have given our null distribution is as extreme or more, we reject the null hypothesis. This also known as the **p-value**.
 
-So what is our null and alternative hypothesis? We care if there is any linear relationship between our independent and dependent variables, i.e. if our slope is not 0. We can formulate this as 
+So what is our null and alternative hypothesis? We care if there is any linear relationship between our independent and dependent variables, i.e. if our slope is not 0. We can formulate this as
 
 $$
 \begin{align}
@@ -226,54 +227,47 @@ H_0 : \beta_0 = 0
 \end{align}
 $$
 
-How do we come up with our test statistic? The idea is that this test statistic will come from a distribution such that we will be able to evaluate if the probability of getting this value from this sample of data was extreme enough to either **reject** or **not reject** our null hypothesis, $H_A$. 
+How do we come up with our test statistic? The idea is that this test statistic will come from a distribution such that we will be able to evaluate if the probability of getting this value from this sample of data was extreme enough to either **reject** or **not reject** our null hypothesis, $H_A$.
 
-*A short digression on the frequentist framework. The data that one has, $Y_i$ is viewed as a sample of a larger population. Because of this, we will never get the true, fixed values of $\beta_0$ and $\beta_1$. We can only do our best to approximate their values, $\hat{\beta_0}$ and $\hat{\beta_1}$. We can make the argument, that if were to sample our population a bunch of times (i.e. get a bunch of $Y_i$'s, we would then be able to construct a sampling distribution of different $(\hat{\beta_0}, \hat{\beta_1})$ pairings. Obviously this would take a lot of time and usually we don't necessarily have a cost or time-effective way to come up with a bunch of $Y_i$ samples. This is where the Central Limit Theorem comes in!* 
+*A short digression on the frequentist framework. The data that one has,* $Y_i$ is viewed as a sample of a larger population. Because of this, we will never get the true, fixed values of $\beta_0$ and $\beta_1$. We can only do our best to approximate their values, $\hat{\beta_0}$ and $\hat{\beta_1}$. We can make the argument, that if were to sample our population a bunch of times (i.e. get a bunch of $Y_i$'s, we would then be able to construct a sampling distribution of different $(\hat{\beta_0}, \hat{\beta_1})$ pairings. Obviously this would take a lot of time and usually we don't necessarily have a cost or time-effective way to come up with a bunch of $Y_i$ samples. This is where the Central Limit Theorem comes in!
 
 *The Central Limit Theorem states that if one was to construct a sampling distribution of means from different samples of data, as the number of sample means gets larger, the sampling distribution approaches a normal distribution.*
 
-Thinking about this, we can state that $\beta_1$ will be normally distributed. Note that we also will have a sampling distribution for $\sigma^2$, which is $\chi^2$ distributed. 
+Thinking about this, we can state that $\beta_1$ will be normally distributed. Note that we also will have a sampling distribution for $\sigma^2$, which is $\chi^2$ distributed.
 
 ### Quick general facts about some test-statistic distributions
 
 Note that there are test statistics that come from different distributions, but in general, we have the t-distribution, F-distribution, and $\chi^2$ distribution.
 
-The **t-distribution** with $\nu$ degrees of freedom is defined as the distribution of a random variable $T$, where
-$$
+The **t-distribution** with $\nu$ degrees of freedom is defined as the distribution of a random variable $T$, where $$
 T = \frac{Z}{\sqrt{V/\nu}} = Z\sqrt{\frac{\nu}{V}} 
-$$
-Where $Z$ is standard normally distributed, $V$ has a $\chi^2$-distribution with $\nu$ degrees of freedom and $Z$ and $V$ are independent. The main usage of the t-distribution in this context is by testing the difference between two means and whether that difference is "significant" given a pre-determined threshold $\alpha$ or not. 
+$$ Where $Z$ is standard normally distributed, $V$ has a $\chi^2$-distribution with $\nu$ degrees of freedom and $Z$ and $V$ are independent. The main usage of the t-distribution in this context is by testing the difference between two means and whether that difference is "significant" given a pre-determined threshold $\alpha$ or not.
 
-The **F-distribution** is defined as 
-$$
+The **F-distribution** is defined as $$
 X = \frac{U_1/d_1}{U_2/d_2}
-$$
-where $U_1$ and $U_2$ are independent random variables with chi-square distributions with respective degrees of freedom $d_1$ and $d_2$. 
+$$ where $U_1$ and $U_2$ are independent random variables with chi-square distributions with respective degrees of freedom $d_1$ and $d_2$.
 
-The **$\chi^2$ distribution** is defined as 
-$$
+The $\chi^2$ distribution is defined as $$
 X = \Sigma_{i=1}^k Z_i^2
-$$
-where $Z_i$ are independent, standard normal random variables. This distribution is often used in goodness of fit tests and likelihood-ratio tests for nested models, among other things. 
+$$ where $Z_i$ are independent, standard normal random variables. This distribution is often used in goodness of fit tests and likelihood-ratio tests for nested models, among other things.
 
-### So what is our test statistic then? 
+### So what is our test statistic then?
 
 We are testing for the probability that there is some sort of relationship between our $Y_i$ and $X_i$. We have assumed a null hypothesis, $H_A$ that states that $\beta_1 = 0$. This our assumed truth. So, if we take our sample $\hat{\beta_1}$, and we standardize it, we will get a value that tells us how far we are from our true $\beta_1$ (and note that this will be t-distributed!)
 
 $$
 T = \frac{\hat{\beta_1} - \beta_1}{SE(\hat{\beta_1})}
-$$
-And because in this hypothesis test, we are testing against $\beta_1 = 0$, this will simplify to 
+$$ And because in this hypothesis test, we are testing against $\beta_1 = 0$, this will simplify to
 
 $$
 T = \frac{\hat{\beta_1}}{SE(\hat{\beta_1})}
 $$
 
-### Finding the standard errors 
+### Finding the standard errors
 
-So now we have the solution to the least squares equations. We have a vector of $\hat{\beta}$'s, as well as an estimate for the variance, $s^2$. Now we need to find the standard error for the $\hat{\beta}$'s so we can create our hypothesis test test-statistic of $\beta_1 / SE(\beta_1)$ which we now know will be t-distributed. 
+So now we have the solution to the least squares equations. We have a vector of $\hat{\beta}$'s, as well as an estimate for the variance, $s^2$. Now we need to find the standard error for the $\hat{\beta}$'s so we can create our hypothesis test test-statistic of $\beta_1 / SE(\beta_1)$ which we now know will be t-distributed.
 
-We recall from up way above that $\vec{\beta} = (X^TX)^{-1}X^TY$. Also note this neat trick that given a matrix $A$ and vector $x$, $Var(Ax) = A*Var(x)*A^T$ and that given a symmetric matrix $A$, $A = A^T$ and $A^{-1}$ is also a symmetric matrix. In our case, we know that $X^TX$ is a symmetric matrix. 
+We recall from up way above that $\vec{\beta} = (X^TX)^{-1}X^TY$. Also note this neat trick that given a matrix $A$ and vector $x$, $Var(Ax) = A*Var(x)*A^T$ and that given a symmetric matrix $A$, $A = A^T$ and $A^{-1}$ is also a symmetric matrix. In our case, we know that $X^TX$ is a symmetric matrix.
 
 $$
 \begin{align}
@@ -287,12 +281,9 @@ Var(\beta) &= Var((X^TX)^{-1}X^T Y)
 \\\\ &= \sigma^2 I * ((X^TX)^{-1})^T
 \\\\ &= \sigma^2 I * (X^TX)^{-1}
 \end{align}
-$$
-Now we only have estimates for some of these values, so in practice, we have that 
-$$
+$$ Now we only have estimates for some of these values, so in practice, we have that $$
 Var(\hat{\beta}) = s^2 I * (X^TX)^{-1}
-$$
-Let's check this out in R.
+$$ Let's check this out in R.
 
 ```{r, comparing our variance estimates}
 # getting our sigma estimate as before 
@@ -308,8 +299,7 @@ sigma.hat %*% solve(t(X.matrix)%*%X.matrix)
 vcov(lm.fit) # compare with above 
 ```
 
-
-We can also then check for the standard errors since the square root of the variance estimate should be the standard errors. 
+We can also then check for the standard errors since the square root of the variance estimate should be the standard errors.
 
 ```{r, getting the standard errors}
 # estimated standard error for beta0
@@ -323,11 +313,11 @@ sqrt(vcov(lm.fit)[1,1])
 sqrt(vcov(lm.fit)[2,2]) 
 ```
 
-We see that they match! Neat! 
+We see that they match! Neat!
 
 ### Calculating our test statistic
 
-Now that we have our $\hat{\beta_1}$ and our $SE(\hat{\beta_1})$, we can now construct our test statistic and evaluate it. 
+Now that we have our $\hat{\beta_1}$ and our $SE(\hat{\beta_1})$, we can now construct our test statistic and evaluate it.
 
 ```{r, calculating our test statistic}
 # getting our derived variance covariance matrix 
@@ -337,22 +327,22 @@ varcovar.matrix <- sigma.hat %*% solve(t(X.matrix)%*%X.matrix)
 beta1_hat <- betas[2,1]
 beta1_SE <- sqrt(varcovar.matrix[2,2])
 test.statistic <- beta1_hat/beta1_SE
+test.statistic
 ```
 
-**How do we evaluate this test statistic?** 
-We know that it comes from a t-distribution and we want evaluate the probability that we would get a value as extreme or more. 
+**How do we evaluate this test statistic?** We know that it comes from a t-distribution and we want evaluate the probability that we would get a value as extreme or more.
 
 ### A small digression into probability distributions
 
 A probability distribution is a function that gives the probabilities of an event happening where $P(A \leq x \leq B) = \int_a^b f(x;\theta) dx$ (for a continuous distribution), where $\theta$ are the parameters that describe the probability distribution. In R, there are four different types of functions for probability distributions. These functions start with either d, p, q, or r.
 
-1. **ddistr**: d is for density and returns the value of $f(y;\theta)$, i.e. the value of the probability density function (continuous distributions) or probability mass function (discrete distributions) 
+1.  **ddistr**: d is for density and returns the value of $f(y;\theta)$, i.e. the value of the probability density function (continuous distributions) or probability mass function (discrete distributions)
 
-2. **pdistr**: p is for probability and returns a value of $F(y;\theta)$, the cumulative distribution function. 
+2.  **pdistr**: p is for probability and returns a value of $F(y;\theta)$, the cumulative distribution function.
 
-3. **qdistr**: q is for quantile and returns a value from the inverse of $F(y; \theta)$ and is also known as the quantile function. 
+3.  **qdistr**: q is for quantile and returns a value from the inverse of $F(y; \theta)$ and is also known as the quantile function.
 
-4. **rdistr**: r is for random and generates a random value from the given distribution. 
+4.  **rdistr**: r is for random and generates a random value from the given distribution.
 
 ```{r}
 plot(seq(-3, 3, 0.01), dnorm(seq(-3, 3, 0.01), 0, 1), cex = 0.5)
@@ -370,9 +360,9 @@ points(rnorm(50, 0, 1), rep(0, 50), pch = 20, col = 'red')
 
 ### Evaluating the test statistic
 
-In our case, we want to find what the probability of getting a value that is equal to or more extreme than the test statistic value *given that the null hypothesis is true*. This is know as our **p-value**. 
+In our case, we want to find what the probability of getting a value that is equal to or more extreme than the test statistic value *given that the null hypothesis is true*. This is know as our **p-value**.
 
-Let's look at this in R. 
+Let's look at this in R.
 
 ```{r, calculating the p-value}
 # # we should get the same estimates of the t-value and p-value from the lm
@@ -385,57 +375,121 @@ summary(lm.fit)[4]
 # let's plot this!
 plot(seq(-8, 8, 0.01), dt(seq(-8, 8, 0.01), N-2), cex = 0.2)
 # plotting that given the value of x such that the cumulative probability is our p-value
-points(qt(p.val, N-2), 0, pch = 19, col = 'blue')
+points(test.statistic, 0, pch = 19, col = 'blue')
 # we also care about the other extreme end
-points(1-qt(p.val, N-2), 0, pch = 19, col = 'red')
+points(-test.statistic, 0, pch = 19, col = 'blue')
 
 ```
 
-An easy question to follow this, is why do we multiply by two above? In this formulation of our hypothesis test, we have a two-tailed test. We are assuming that $\beta_1 = 0$ and seeing if it $\neq 0$ as opposed to just $>$ or $<$. Therefore, we have to consider the probability that it is far greater than 0 or far less than 0. In the graph above, we care about the area under the curves to the left of the blue point and to the right of the red point. 
+An easy question to follow this, is why do we multiply by two above to get the p-value? In this formulation of our hypothesis test, we have a two-tailed test. We are assuming that $\beta_1 = 0$ and seeing if it $\neq 0$ as opposed to just $>$ or $<$. Therefore, we have to consider the probability that the difference between our sampled and true value is either far greater than 0 or far less than 0. In the graph above, *we care about the area under the curves outside of the blue points.*
 
 ### How good is this value to reject our null hypothesis? Is there a set of values?
 
-Ideally before going through all of this, you will have chosen a threshold value, $\alpha$. This is the probability you are willing to reject the null hypothesis at. If your p-value lies below this threshold, then we would reject the null hypothesis. If it is above, we simply do not reject the null hypothesis. *This does not mean the null hypothesis is true, it simply means you do not have a set of data / model that is able to reject the null.* 
+Ideally before going through all of this, you will have chosen a threshold value, $\alpha$. This is the probability you are willing to reject the null hypothesis at. If your p-value lies below this threshold, then we would reject the null hypothesis. If it is above, we simply do not reject the null hypothesis. *This does not mean the null hypothesis is true, it simply means you do not have a set of data / model that is able to reject the null.*
 
-We can also construct an interval such that there is a $(1-\alpha)$% probability that the interval would contain the true parameter. This is called the **confidence interval** for the value. 
+Taking a look again at our t-distribution, if we have our $\alpha = 0.05$, this is the parts under the curve that is shaded. We see our test statistic from our linear model fit plotted in blue!
 
-$$
-
-$$
-
-
-How are test statistics and confidence intervals related?
-
-### Looking at additional information ($R^2$ and the F-statistic)
-
-$R^2$
-
-```{r, looking at r^2}
-# SST <- sum((Y1 - mean(Y1))^2) # sum of residuals from the mean, df = n-1
-# SSE <- sum((Y1 - H%*%as.matrix(Y1))^2) # sum of residuals from best fit line, df = n-p
-# SSR <- SST - SSE # the difference, df = p-1. based on pythagorean theorem  
-# 
-# # this should match the R-squared
-# SSR/SST # also can be written as 1 - SSE / SST
-# 
-# # NEED TO FIGURE OUT ADJUSTED R^2
-# # Adjusted R-squared:  0.3764 
-# # we can adjust using the degrees of freedom, SSR/(p-1) / SST/(n-1)
-# SSR/(SST/(N-1))
-# (SSR/SST)*(N-1)
+```{r, plotting alpha is 0.05}
+# let's plot this!
+plot(seq(-8, 8, 0.01), dt(seq(-8, 8, 0.01), N-2), cex = 0.2)
+# getting the areas of the curve that match up to our threshold of alpha
+polygon(c(seq(qt(0.975, N-2), 8, 0.01), rev(seq(qt(0.975, N-2), 8, 0.01))),
+        c(rep(0, length(seq(qt(0.975, N-2), 8, 0.01))), rev(dt(seq(qt(0.975, N-2), 8, 0.01), N-2))),
+        col = 'gray', border = NA)
+polygon(c(seq(-8, qt(0.025, N-2), 0.01), rev(seq(-8, qt(0.025, N-2), 0.01))),
+        c(rep(0, length(seq(-8, qt(0.025, N-2), 0.01))), rev(dt(seq(-8, qt(0.025, N-2), 0.01), N-2))),
+        col = 'gray', border = NA)
+# plotting our test-statistic 
+points(test.statistic, 0, pch = 19, col = 'blue')
 ```
 
-```{r, the f-statistic}
-# this should match the f-stat p-value from the lm 
-# 2*(1-pf(abs(SSR/(SSE/(N-2))), 1, N-2)) # like the t-dist, SSR/(SSE/(N-2)) is the f-statistic
+We can also construct an interval such that there is a $(1-\alpha)$% probability that the interval would contain the true parameter. This is called the **confidence interval** for the value. Based on our choice of $\alpha$ value, we have assumed that with our test statistic $T$, $P(T < qt(\alpha/2) \cup T > qt(1-\alpha/2)) = 0.05$ (This is the entire shaded region in gray in the plot above). Another way to write this is...
+
+$$
+\begin{align}
+P(T < qt(\alpha/2) \cup T > qt(1-\alpha/2)) &= 0.05
+\\\\ P(qt(\alpha/2) \leq T \leq qt(1-\alpha/2)) &= 0.95
+\\\\ P(qt(\alpha/2) \leq \frac{\hat{\beta_1}-\beta_1}{SE(\hat{\beta_1})} \leq qt(1-\alpha/2)) &= 0.95
+\\\\ P(SE(\hat{\beta_1})*qt(\alpha/2) \leq \hat{\beta_1}-\beta_1 \leq SE(\hat{\beta_1})*qt(1-\alpha/2)) &= 0.95
+\\\\ P(- \hat{\beta_1} +SE(\hat{\beta_1})*qt(\alpha/2) \leq -\beta_1 \leq -\hat{\beta_1} + SE(\hat{\beta_1})*qt(1-\alpha/2)) &= 0.95
+\\\\ P(- \hat{\beta_1} -SE(\hat{\beta_1})*qt(1-\alpha/2)) \leq -\beta_1 \leq -\hat{\beta_1} + SE(\hat{\beta_1})*qt(1-\alpha/2)) &= 0.95
+\\\\ P(\hat{\beta_1} + SE(\hat{\beta_1})*qt(1-\alpha/2)) \geq \beta_1 \geq \hat{\beta_1} - SE(\hat{\beta_1})*qt(1-\alpha/2)) &= 0.95
+\end{align}
+$$ Therefore we have our 95% confidence interval as $\hat{\beta_1} \pm qt(1-\alpha/2)*SE(\hat{\beta_1})$.
+
+**How are test statistics and confidence intervals related?** Looking up above, we see that both use the same quantities of $\hat{\beta_1}, SE(\hat{\beta_1})$ as well as use the fact that the test statistic in this case comes from the t-distribution. The test-statistic will just tell us where we are in the t-distribution given that the null hypothesis is true whereas confidence intervals tell us a range of the possible values that would capture the true value $(1-\alpha)$% of the time.
+
+### Looking at additional information ($R^2$)
+
+$R^2$ (sometimes called the coefficient of determination) is the proportion of the variation in the dependent variable that is predictable from the independent variables. But what does this mean intuitively? If we had no independent variables, we could plot our total variation using the mean of our dependent variable. Note that we are squaring our residuals to better capture high amounts of variation from the mean.
+
+```{r}
+plot((Yi - mean(Yi))^2, pch = 16)
+```
+
+But, we have created a best-fit line using our mean-squared error solution. The variation between our independent and dependent variables now looks like this (overlaid in gray)
+
+```{r}
+plot((Yi - mean(Yi))^2, pch = 16)
+points((Yi - H%*%as.matrix(Yi))^2, pch = 16, col = 'gray')
+```
+
+Is there a difference between these two? We see those differences in red.
+
+```{r}
+plot((Yi - mean(Yi))^2, pch = 16)
+points((Yi - H%*%as.matrix(Yi))^2, pch = 16, col = 'gray')
+points((Yi - mean(Yi))^2 - (Yi - H%*%as.matrix(Yi))^2, pch = 16, col = 'red')
+```
+
+At each different index, we see that sometimes the difference between the average value of the dependent variable (in a way this is the null hypothesis, where $\beta_1 = 0$) versus the best-fit line is very small. There is not a lot of difference. However sometimes we see that the difference can be large. How could we quantify these differences for the whole dataset?
+
+If we were to add up all of the residuals for the mean (in black) and then add up all of the residuals for the best-fit line (in gray), the difference would be the sum of all the residuals of the differences (in red). Intuitively, if the residuals of the mean and best fit line matched, their sums would be the same and the difference would be 0. (And we would concur that in our model there was no point in adding in predictors since it matched simply the mean line). In other words, relative to the variation in the mean line, the best-fit line was not able to capture any more additional variation.
+
+However if the residuals of the best-fit line were 0 (i.e. our model matched perfectly), then the difference between the residuals of the mean line and the best-fit line would just be the residuals of the mean line. In other words, relative to the variation in the mean line, the best-fit line is able to also capture the same variation.
+
+Another way to write this relation is by dividing these differences in residuals over the mean line. This value (which lies between 0 and 1) is our $R^2$! The sum of the residuals of the mean line is often called the sum of squares (SST) total while the sum of the residuals of the best-fit line is called the sum of squared errors (SSE, which we saw when explaining the variance of our data).
+
+$$
+R^2 = \frac{SST - SSE}{SST}
+$$
+
+Let's look at this in R. Note that the adjusted $R^2$ takes into account our degrees of freedom (so this time our variance is the same as our adjusted sum of squared errors).
+
+```{r, looking at r^2}
+SST <- sum((Yi - mean(Yi))^2) # sum of residuals from the mean, df = n-1
+SSE <- sum((Yi - H%*%as.matrix(Yi))^2) # sum of residuals from best fit line, df = n-p
+SSR <- SST - SSE # the difference, df = p-1.
+
+# this should match the R-squared of the linear model fit
+SSR/SST # also can be written as 1 - SSE / SST
+
+# checking the linear model fit
+summary(lm.fit)[8]
+
+# Adjusted R-squared
+# we can adjust using the degrees of freedom
+adjSST <- SST/(N-1) # sum of residuals from the mean, df = n-1
+adjSSE <- SSE/(N-2) # sum of residuals from best fit line, df = n-p
+adjSSR <- adjSST - adjSSE # the difference, df = p-1.
+adjSSR/adjSST
+
+# checking the linear model fit 
+summary(lm.fit)[9]
+```
+
+Now you can understand where almost all the values in a summary of a model fit in R for a simple linear regression come from!
+
+```{r}
+summary(lm.fit)
 ```
 
 ### Additional resources
 
--   On matrix properties: https://www.ucl.ac.uk/\~ucahhwi/MATH6502/handout9.pdf
--   More on the hat matrix: https://pj.freefaculty.org/guides/stat/Regression/RegressionDiagnostics/OlsHatMatrix.pdf
--   More on simple linear regression with matrices: https://www.stat.cmu.edu/\~cshalizi/mreg/15/lectures/13/lecture-13.pdf
--   On a geometric interpretation: https://bookdown.org/ts_robinson1994/10EconometricTheorems/linear_projection.html
-- A nice video on explanation of variance: https://www.youtube.com/watch?v=x0rmUXWtSS8
-- more in depth video of the least square estimators: https://www.youtube.com/watch?v=D2ns91Vcs8U 
-
+-   On matrix properties: <https://www.ucl.ac.uk/~ucahhwi/MATH6502/handout9.pdf>
+-   More on the hat matrix: <https://pj.freefaculty.org/guides/stat/Regression/RegressionDiagnostics/OlsHatMatrix.pdf>
+-   More on simple linear regression with matrices: <https://www.stat.cmu.edu/~cshalizi/mreg/15/lectures/13/lecture-13.pdf>
+-   On a geometric interpretation: <https://bookdown.org/ts_robinson1994/10EconometricTheorems/linear_projection.html>
+-   A nice video on explanation of variance: <https://www.youtube.com/watch?v=x0rmUXWtSS8>
+-   A more in depth video of the least square estimators: <https://www.youtube.com/watch?v=D2ns91Vcs8U>
+-   A more in depth video on confidence intervals: <https://www.youtube.com/watch?v=eaB6SmKJFrk>
