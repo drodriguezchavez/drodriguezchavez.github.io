@@ -8,7 +8,7 @@ Keywords: "power, type I and type II errors, breakdown of null hypothesis testin
 
 A type-I error is when one incorrectly rejects the null hypothesis, even though it is true. A common analogy for a type-I error is when a court rules that a defendant is guilty even though they are innocent. The type-I error conditions on the null hypothesis being true. The probability of a type-I error is usually denoted as $\alpha$. The usual threshold for this is 0.05. We see $\alpha$ in pink below. 
 
-A type-II error is when one incorrectly fails to reject the null even though the alternative hypothesis is true. A common analogy for a type-II error is when a court fails to convict a guilty person. The type-II error conditions on the alternative hypothesis being true. The probability of a type-II error is usually denoted as $\beta$. The usual threshold for this is 0.20. We see $\beta$ in blue below. 
+A type-II error is when one incorrectly fails to reject the null even though the null hypothesis is false. A common analogy for a type-II error is when a court fails to convict a guilty person. The type-II error conditions on the null hypothesis being false. The probability of a type-II error is usually denoted as $\beta$. The usual threshold for this is 0.20. We see $\beta$ in blue below. 
 
 ```{r, plotting alpha}
 plot(seq(-3, 6, 0.01), dt(seq(-3, 6, 0.01), 100), cex = 0.3)
