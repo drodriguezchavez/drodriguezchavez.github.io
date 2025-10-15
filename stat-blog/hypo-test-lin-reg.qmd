@@ -25,7 +25,7 @@ $$ The four model assumptions that we have with linear regression are...
 
 3.  **Normality**. The errors are Normally distributed.
 
-4.  **Independence**. This assumes that $Y_i$ is independent of $Y_j$. 
+4.  **Independence**. This assumes that $Y_i$ is independent of $Y_j$.
 
 Let's explore a simulated set of data to better visualize this. Simulations are nice because we can make sure our models are working as we think they should before applying it to real data. For the next bit, we will be using $\beta_0 = 1$, $\beta_1 = 1$, $\sigma^2 = 20$, and with 100 data points.
 
@@ -52,12 +52,12 @@ plot(Xi,Yi, pch = 16)
 **What's our goal in linear regression?** We have an independent variable $X_i$, and we want to see how it relates to our dependent variable $Y_i$ in this linear relationship, of an intercept and a slope. The intercept, $\beta_0$ is the average value of our outcome, $Y_i$ when our independent variable, or predictor, is set to 0. Our slope, on the other hand, can be understood as the magnitude of the change for the dependent variable given a 1 unit increase of the predictor (independent) variable.
 
 <!-- Define residuals -->
-So, our goal is to find a line best minimizes the difference between it and all data $(X_i, Y_i)$, given our choice of $\beta_0$ and $\beta_1$. One way of thinking about how to do it is to turn it into a minimization problem. We want to minimize the distance between the line (our model-predicted values in a sense) and the data itself. If $Y_i$ is our dependent variable, then we can write $\hat{Y}_i = \beta_0 + \beta_1 * X_i$ as our model-predicted values (our line)! Thus, our goal is to minimize 
+
+So, our goal is to find a line best minimizes the difference between it and all data $(X_i, Y_i)$, given our choice of $\beta_0$ and $\beta_1$. One way of thinking about how to do it is to turn it into a minimization problem. We want to minimize the distance between the line (our model-predicted values in a sense) and the data itself. If $Y_i$ is our dependent variable, then we can write $\hat{Y}_i = \beta_0 + \beta_1 * X_i$ as our model-predicted values (our line)! Thus, our goal is to minimize
 
 $$ 
 min \space \Sigma_{i=1}^n (Y_i - [\beta_0 + X_i \beta_1])^2 
-$$
-The summed values above is known as the sum of squared errors. When we turn it into a minimization problem, we say that we are trying to solve the least squares equation.
+$$ The summed values above is known as the sum of squared errors. When we turn it into a minimization problem, we say that we are trying to solve the least squares equation.
 
 <!-- Why do we square it? -->
 
@@ -222,10 +222,10 @@ We can formulate this into a hypothesis test. The general steps are
 
 1.  Create the null and alternative hypotheses.
 
-2.  Create a test statistic that will quantify evidence against the null hypothesis given the sample. This test statistic should have a calculable sampling distribution. Note that you can't mix and match test statistics with distributions. 
+2.  Create a test statistic that will quantify evidence against the null hypothesis given the sample. This test statistic should have a calculable sampling distribution. Note that you can't mix and match test statistics with distributions.
 
 3.  Decide a threshold or significance level, $\alpha$. If the probability of getting the test statistic given that the null hypothesis is true is smaller than $\alpha$, we reject the null hypothesis. This probability is also known as the **p-value**.
- 
+
 So in this case, what is our null and alternative hypothesis? We care if there is any linear relationship between our independent and dependent variables, i.e. if our slope ($\beta_1$) is not 0. We can formulate this as
 
 $$
@@ -239,9 +239,11 @@ $$
 
 *A short digression on the frequentist framework*. The data that one has, $X_i$ is viewed as a sample of a larger population. Because of this, we will never get the true, fixed values of $\beta_0$ and $\beta_1$. We can only do our best to estimate their values, $\hat{\beta_0}$ and $\hat{\beta_1}$. We can make the argument, that if were to sample our population a bunch of times (i.e. get a bunch of $X_i$'s, we would then be able to construct a sampling distribution of different $(\hat{\beta_0}, \hat{\beta_1})$ pairings. Obviously this would take a lot of time and usually we don't necessarily have a cost or time-effective way to come up with a bunch of samples. This is where the Central Limit Theorem comes in!
 
+```{=html}
 <!-- Note that as our number of samples increases, this would mean that betahat -> beta. 
 look at the asymptotic properties of estimators! consistent and sufficient estimators. 
 -->
+```
 
 *The Central Limit Theorem states that if one was to construct a sampling distribution of means by sampling a population over and over and estimating the mean each time, then as the number of samples increases, the sampling distribution approaches a normal distribution.*
 
@@ -255,9 +257,9 @@ The **t-distribution** with $\nu$ degrees of freedom is defined as the distribut
 T = \frac{Z}{\sqrt{V/\nu}} = Z\sqrt{\frac{\nu}{V}} 
 $$ Where $Z$ is standard normally distributed, $V$ has a $\chi^2$-distribution with $\nu$ degrees of freedom and $Z$ and $V$ are independent. The main usage of the t-distribution in this context is by testing the difference between two means and whether that difference is "significant" given a pre-determined threshold $\alpha$ or not.
 
-The **$\chi^2$ distribution** is defined as $$
+The $\chi^2$ distribution is defined as $$
 X = \Sigma_{i=1}^k Z_i^2
-$$ where $Z_i$ are independent, standard normal random variables. This distribution is often used in goodness of fit tests and likelihood-ratio tests for nested models, among other things. Note the sample variance is $\chi^2$-distributed. 
+$$ where $Z_i$ are independent, standard normal random variables. This distribution is often used in goodness of fit tests and likelihood-ratio tests for nested models, among other things. Note the sample variance is $\chi^2$-distributed.
 
 The **F-distribution** is defined as $$
 X = \frac{U_1/d_1}{U_2/d_2}
@@ -265,8 +267,7 @@ $$ where $U_1$ and $U_2$ are independent random variables with chi-square distri
 
 ### So what is our test statistic then?
 
-We are testing to see if there is some linear relationship between our $Y_i$ and $X_i$. We have assumed a null hypothesis, $H_0$ that states that $\beta_1 = 0$. This our assumed truth. So, if we take our estimated $\hat{\beta_1}$, and we standardize it around the value of $\beta_1$ under our null hypothesis, we will get a measure of how far $\hat{\beta_1}$ is from our assumed $\beta_1$. Note that this measure will be t-distributed! So, our test statistic, $T$, can be written as
-$$
+We are testing to see if there is some linear relationship between our $Y_i$ and $X_i$. We have assumed a null hypothesis, $H_0$ that states that $\beta_1 = 0$. This our assumed truth. So, if we take our estimated $\hat{\beta_1}$, and we standardize it around the value of $\beta_1$ under our null hypothesis, we will get a measure of how far $\hat{\beta_1}$ is from our assumed $\beta_1$. Note that this measure will be t-distributed! So, our test statistic, $T$, can be written as $$
 T = \frac{\hat{\beta_1} - \beta_1}{SE(\hat{\beta_1})}
 $$ And because in this hypothesis test, we are assuming that $\beta_1 = 0$ (i.e. given the null hypothesis is true), this will simplify to
 
@@ -349,11 +350,11 @@ test.statistic
 
 The probability of an event $x$ happening can be defined as $P(A \leq x \leq B) = \int_A^B f(x;\theta) dx$ (for a continuous distribution), where $\theta$ are the parameters that describe $f(x;\theta)$, the probability density function of a probability distribution. In R, there are four different types of functions for probability distributions. These functions start with either d, p, q, or r.
 
-1.  **ddistr**: d is for density and returns the value of $f(y;\theta)$, i.e. the value of the probability density function (continuous distributions) or probability mass function (discrete distributions). *This is the green point in the figure below. It is the density evaluated at $x = 2$.*
+1.  **ddistr**: d is for density and returns the value of $f(y;\theta)$, i.e. the value of the probability density function (continuous distributions) or probability mass function (discrete distributions). *This is the green point in the figure below. It is the density evaluated at* $x = 2$.
 
-2.  **pdistr**: p is for probability and returns a value of $F(y;\theta)$, the cumulative distribution function. *This is the shaded region in the figure below. It is evaluated up until $x = 2$.* 
+2.  **pdistr**: p is for probability and returns a value of $F(y;\theta)$, the cumulative distribution function. *This is the shaded region in the figure below. It is evaluated up until* $x = 2$.
 
-3.  **qdistr**: q is for quantile and returns a value from the inverse of $F(y; \theta)$ and is also known as the quantile function. *This is the blue point. It is the inverse of pdistr. It is evaluated at 0.977, which results in a value of $x = 2$*. 
+3.  **qdistr**: q is for quantile and returns a value from the inverse of $F(y; \theta)$ and is also known as the quantile function. *This is the blue point. It is the inverse of pdistr. It is evaluated at 0.977, which results in a value of* $x = 2$.
 
 4.  **rdistr**: r is for random and generates a random value from the given distribution. *These are the red points in the figure below. There are 50 points drawn from a Normal distribution, meaning that the mean is 0 and the variance is 1.*
 
@@ -432,7 +433,7 @@ $$ Therefore we have our 95% confidence interval as $\hat{\beta_1} \pm qt(1-\alp
 
 **How are test statistics and confidence intervals related?** Looking up above, we see that both use the same quantities of $\hat{\beta_1}, SE(\hat{\beta_1})$ as well as use the fact that the test statistic in this case comes from the t-distribution. The test-statistic will just tell us where we are in the t-distribution given that the null hypothesis is true whereas confidence intervals tell us a range of the possible values that would capture the true value $(1-\alpha)$% of the time.
 
-*Note that as our sample size increases, our t-distribution will converge to a Normal distribution, so often folks will use 1.96 as a proxy instead of $qt(1-\alpha/2)$.*
+*Note that as our sample size increases, our t-distribution will converge to a Normal distribution, so often folks will use 1.96 as a proxy instead of* $qt(1-\alpha/2)$.
 
 ```{r, plotting t-distributions}
 plot(seq(-5, 5, 0.01), dt(seq(-5, 5, 0.01), 10), cex = 0.1, col = 'darkgreen')

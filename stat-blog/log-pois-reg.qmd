@@ -1,0 +1,11 @@
+---
+title: "Logistic and Poisson Regression"
+date: 10/14/2025
+Keywords: "regression, logistic, poisson, maximum likelihood"
+---
+
+### Logistic Regression 
+
+### Poisson Regression 
+
+### 
