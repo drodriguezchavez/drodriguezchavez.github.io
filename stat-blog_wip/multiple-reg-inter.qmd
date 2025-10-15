@@ -1,0 +1,5 @@
+---
+title: "Multiple Regression, Interactions"
+date: 09/03/2024
+Keywords: "Multiple linear regression"
+---

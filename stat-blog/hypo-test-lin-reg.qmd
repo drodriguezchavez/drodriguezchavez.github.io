@@ -222,7 +222,7 @@ We can formulate this into a hypothesis test. The general steps are
 
 1.  Create the null and alternative hypotheses.
 
-2.  Create a test statistic that quantifies the behavior assumed in the null hypothesis given the sample. This test statistic should have a calculable sampling distribution. Note that you can't mix and match test statistics with distributions. 
+2.  Create a test statistic that will quantify evidence against the null hypothesis given the sample. This test statistic should have a calculable sampling distribution. Note that you can't mix and match test statistics with distributions. 
 
 3.  Decide a threshold or significance level, $\alpha$. If the probability of getting the test statistic given that the null hypothesis is true is smaller than $\alpha$, we reject the null hypothesis. This probability is also known as the **p-value**.
  
@@ -265,10 +265,10 @@ $$ where $U_1$ and $U_2$ are independent random variables with chi-square distri
 
 ### So what is our test statistic then?
 
-We are testing to see if there is some linear relationship between our $Y_i$ and $X_i$. We have assumed a null hypothesis, $H_A$ that states that $\beta_1 = 0$. This our assumed truth. So, if we take our estimated $\hat{\beta_1}$, and we standardize it around the value of $\beta_1$ under our null hypothesis, we will get a measure of how far $\hat{\beta_1}$ is from our assumed $\beta_1$. Note that this measure will be t-distributed! So, our test statistic, $T$, can be written as
+We are testing to see if there is some linear relationship between our $Y_i$ and $X_i$. We have assumed a null hypothesis, $H_0$ that states that $\beta_1 = 0$. This our assumed truth. So, if we take our estimated $\hat{\beta_1}$, and we standardize it around the value of $\beta_1$ under our null hypothesis, we will get a measure of how far $\hat{\beta_1}$ is from our assumed $\beta_1$. Note that this measure will be t-distributed! So, our test statistic, $T$, can be written as
 $$
 T = \frac{\hat{\beta_1} - \beta_1}{SE(\hat{\beta_1})}
-$$ And because in this hypothesis test, we are assuming that $\beta_1 = 0$, this will simplify to
+$$ And because in this hypothesis test, we are assuming that $\beta_1 = 0$ (i.e. given the null hypothesis is true), this will simplify to
 
 $$
 T = \frac{\hat{\beta_1}}{SE(\hat{\beta_1})}
@@ -431,6 +431,18 @@ P(T < qt(\alpha/2) \cup T > qt(1-\alpha/2)) &= 0.05
 $$ Therefore we have our 95% confidence interval as $\hat{\beta_1} \pm qt(1-\alpha/2)*SE(\hat{\beta_1})$.
 
 **How are test statistics and confidence intervals related?** Looking up above, we see that both use the same quantities of $\hat{\beta_1}, SE(\hat{\beta_1})$ as well as use the fact that the test statistic in this case comes from the t-distribution. The test-statistic will just tell us where we are in the t-distribution given that the null hypothesis is true whereas confidence intervals tell us a range of the possible values that would capture the true value $(1-\alpha)$% of the time.
+
+*Note that as our sample size increases, our t-distribution will converge to a Normal distribution, so often folks will use 1.96 as a proxy instead of $qt(1-\alpha/2)$.*
+
+```{r, plotting t-distributions}
+plot(seq(-5, 5, 0.01), dt(seq(-5, 5, 0.01), 10), cex = 0.1, col = 'darkgreen')
+points(seq(-5, 5, 0.01), dt(seq(-5, 5, 0.01), 1), cex = 0.1, col = 'purple')
+points(seq(-5, 5, 0.01), dt(seq(-5, 5, 0.01), 2), cex = 0.1, col = 'blue')
+points(seq(-5, 5, 0.01), dt(seq(-5, 5, 0.01), 5), cex = 0.1, col = 'darkgreen')
+points(seq(-5, 5, 0.01), dt(seq(-5, 5, 0.01), 10), cex = 0.1, col = 'orange')
+points(seq(-5, 5, 0.01), dt(seq(-5, 5, 0.01), 10^6), cex = 0.3, col = 'red')
+points(seq(-5, 5, 0.01), dnorm(seq(-5, 5, 0.01), 0, 1), cex = 0.1, col = 'black')
+```
 
 <!-- The test statistic makes no claims about the true value of $\beta_1$, whereas the confidence interval focuses on the true value of beta1 and your estimate. -->
 
