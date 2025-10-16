@@ -1,8 +1,14 @@
 ---
 title: "Logistic and Poisson Regression"
 date: 10/14/2025
-Keywords: "regression, logistic, poisson, maximum likelihood"
+Keywords: "regression, logistic, poisson, maximum likelihood, Bayes Theorem"
 ---
+
+Bayes Theorem.
+
+Prior, posterior, likelihood. based on bayes theorem.
+
+Maximum likelihood.
 
 ### Logistic Regression 
 

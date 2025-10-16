@@ -8,7 +8,7 @@ Keywords: "power, type I and type II errors, breakdown of null hypothesis testin
 
 A type-I error is when one incorrectly rejects the null hypothesis, even though it is true. A common analogy for a type-I error is when a court rules that a defendant is guilty even though they are innocent. The type-I error conditions on the null hypothesis being true. The probability of a type-I error is usually denoted as $\alpha$. The usual threshold for this is 0.05. We see $\alpha$ in pink below. 
 
-A type-II error is when one incorrectly fails to reject the null even though the null hypothesis is false. A common analogy for a type-II error is when a court fails to convict a guilty person. The type-II error conditions on the null hypothesis being false. The probability of a type-II error is usually denoted as $\beta$. The usual threshold for this is 0.20. We see $\beta$ in blue below. 
+A type-II error is when one incorrectly fails to reject the null even though the alternative hypothesis is true. A common analogy for a type-II error is when a court fails to convict a guilty person. The type-II error conditions on the alternative hypothesis being true. The probability of a type-II error is usually denoted as $\beta$. The usual threshold for this is 0.20. We see $\beta$ in blue below. 
 
 ```{r, plotting alpha}
 plot(seq(-3, 6, 0.01), dt(seq(-3, 6, 0.01), 100), cex = 0.3)
@@ -43,6 +43,8 @@ Looking at the type-II error more in depth, we can rewrite that given the altern
 -   **Population variance:** the variance of our test-statistic is controlled by the actual population variance and the sample size. If the actual populataion variance is large, the null and alternative distribution will potentially overlap more, both pushing the critical value potentially more into the critical region, but it is unclear the effects. Potentially a net negative effect on power.
 
 -   **Sample size:** However if we increase our sample size, the overall variance of our null and alternative distributions will shrink. This means that the critical value will shift towards 0 and more of the alternative distribution centers around $\delta$. Thus, higher sample size means higher power.
+
+<!-- simulate sigma/root(n) what happens as we change for n. change variance of x. sample size. sigma. what x looks like. -->
 
 ### Violations of linear regression 
 
@@ -100,6 +102,8 @@ what can happens when the model assumptions are violated?
 what steps are invalid when you go through the procedure?
 what does it mean for a confidence interval to be invalid? what does that mean?
 can you walk through that?
+
+what happens to your type i and type ii errors. 
 
 ### Additional Resources
 

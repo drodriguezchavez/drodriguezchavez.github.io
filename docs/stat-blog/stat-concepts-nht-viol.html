@@ -4990,7 +4990,7 @@ window.Quarto = {
 <section id="type-i-vs.-type-ii-errors-why-do-we-care" class="level3">
 <h3 class="anchored" data-anchor-id="type-i-vs.-type-ii-errors-why-do-we-care">Type I vs. Type II errors, why do we care?</h3>
 <p>A type-I error is when one incorrectly rejects the null hypothesis, even though it is true. A common analogy for a type-I error is when a court rules that a defendant is guilty even though they are innocent. The type-I error conditions on the null hypothesis being true. The probability of a type-I error is usually denoted as <span class="math inline">\(\alpha\)</span>. The usual threshold for this is 0.05. We see <span class="math inline">\(\alpha\)</span> in pink below.</p>
-<p>A type-II error is when one incorrectly fails to reject the null even though the null hypothesis is false. A common analogy for a type-II error is when a court fails to convict a guilty person. The type-II error conditions on the null hypothesis being false. The probability of a type-II error is usually denoted as <span class="math inline">\(\beta\)</span>. The usual threshold for this is 0.20. We see <span class="math inline">\(\beta\)</span> in blue below.</p>
+<p>A type-II error is when one incorrectly fails to reject the null even though the alternative hypothesis is true. A common analogy for a type-II error is when a court fails to convict a guilty person. The type-II error conditions on the alternative hypothesis being true. The probability of a type-II error is usually denoted as <span class="math inline">\(\beta\)</span>. The usual threshold for this is 0.20. We see <span class="math inline">\(\beta\)</span> in blue below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">6</span>, <span class="fl">0.01</span>), <span class="fu">dt</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">6</span>, <span class="fl">0.01</span>), <span class="dv">100</span>), <span class="at">cex =</span> <span class="fl">0.3</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -5028,6 +5028,7 @@ window.Quarto = {
 <li><p><strong>Population variance:</strong> the variance of our test-statistic is controlled by the actual population variance and the sample size. If the actual populataion variance is large, the null and alternative distribution will potentially overlap more, both pushing the critical value potentially more into the critical region, but it is unclear the effects. Potentially a net negative effect on power.</p></li>
 <li><p><strong>Sample size:</strong> However if we increase our sample size, the overall variance of our null and alternative distributions will shrink. This means that the critical value will shift towards 0 and more of the alternative distribution centers around <span class="math inline">\(\delta\)</span>. Thus, higher sample size means higher power.</p></li>
 </ul>
+<!-- simulate sigma/root(n) what happens as we change for n. change variance of x. sample size. sigma. what x looks like. -->
 </section>
 <section id="violations-of-linear-regression" class="level3">
 <h3 class="anchored" data-anchor-id="violations-of-linear-regression">Violations of linear regression</h3>
@@ -5061,6 +5062,7 @@ Var(\beta) = (X^T X)^{-1} X^T * \Sigma * ( (X^T X)^{-1} X^T )^T
 <section id="what-happens-to-our-confidence-intervals" class="level3">
 <h3 class="anchored" data-anchor-id="what-happens-to-our-confidence-intervals">What happens to our confidence intervals?</h3>
 <p>what can happens when the model assumptions are violated? what steps are invalid when you go through the procedure? what does it mean for a confidence interval to be invalid? what does that mean? can you walk through that?</p>
+<p>what happens to your type i and type ii errors.</p>
 </section>
 <section id="additional-resources" class="level3">
 <h3 class="anchored" data-anchor-id="additional-resources">Additional Resources</h3>
