@@ -98,12 +98,12 @@ Thus if we violate the assumptions of homoskedasticity, the variance and standar
 
 ### What happens to our confidence intervals? 
 
-what can happens when the model assumptions are violated?
 what steps are invalid when you go through the procedure?
 what does it mean for a confidence interval to be invalid? what does that mean?
 can you walk through that?
 
-what happens to your type i and type ii errors. 
+### What happens to our type-I and type-II errors?
+
 
 ### Additional Resources
 
