@@ -1,0 +1,51 @@
+---
+title: "Distributions"
+date: 09/03/2024
+Keywords: "Statistical distributions"
+---
+
+looking at specificity
+
+```{r}
+library(tidyverse)
+
+prob.infected <- 0.001 # P(D)
+sensitivity <- 0.9 # P(+ | D)
+specificity <- 0.99 # P(- | -D)
+prob.false.pos <- 1- specificity # P(+ | -D) = 1 - P(- | -D) = 1 - specificity 
+  
+  
+# goal: P(D | +) = P(D and +) / P(+)  
+# P(D and +) = P(+ | D)*P(D)
+# P(+) = P(+ | D)*P(D) + P(+ | -D)*P(-D) 
+  
+prob.true.diagnosis <- sensitivity*prob.infected / 
+  (sensitivity*prob.infected + prob.false.pos*(1 -prob.infected ))
+prob.true.diagnosis*100
+
+
+#############################
+prob.infected <- 0.5 # P(D)
+prob.true.diagnosis <- c()
+ij.pairs <- c()
+for (i in seq(0, 1, 0.01)) {
+  for (j in seq(0, 1, 0.01)) {
+    sensitivity <- i # P(+ | D)
+    specificity <- j
+    prob.false.pos <- 1- specificity # P(+ | -D) = 1 - P(- | -D) = 1 - specificity 
+    
+    ptd <- sensitivity*prob.infected / (sensitivity*prob.infected + prob.false.pos*(1 -prob.infected))
+    prob.true.diagnosis <- rbind(prob.true.diagnosis, ptd*100)
+    ij.pairs <- rbind(ij.pairs, c(i, j))
+  }
+}
+
+diagnosis.matrix <- as.data.frame(ij.pairs) |>
+  cbind(prob.true.diagnosis) |>
+  rename(c(sensitivity = V1, specificity = V2))
+
+# so what drives the dynamics is the specificity ! interesting 
+ggplot(diagnosis.matrix, aes(x = sensitivity, y = specificity, fill = prob.true.diagnosis)) +
+    geom_tile() +
+    scale_fill_gradient(low="red", high="darkgreen", name="P(Correct Diagnosis)")
+```

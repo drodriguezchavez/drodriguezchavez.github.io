@@ -1,0 +1,51 @@
+---
+title: "Logistic and Poisson Regression"
+date: 10/14/2025
+Keywords: "regression, logistic, poisson, maximum likelihood, Bayes Theorem"
+---
+
+### Bayes' Theorem
+
+Bayes' theorem is a theorem of conditional probability formulated using other probability definitions.
+
+Given event *A* and event *B*, the probability of *A* and *P* can be re-written as a conditional probability.
+
+$$
+P(A \hspace{1mm} and \hspace{1mm} B) = P(A|B)P(B) = P(B|A)P(A)
+$$
+
+We can thus set these two conditional probabilities equal to each other and get that
+
+$$
+ P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+$$ Bayes' theorem has been revolutionary in the field of statistics. Given evidence (or data) *X* and parameters $\theta$, the above theorem is often written in the form
+
+$$
+P(\theta|X) = \frac{P(X|\theta)P(\theta)}{P(X)}
+$$ Where $P(\theta|X)$ can be viewed as the probability of the parameters given the data. In Bayesian statistics, it is also known as the *posterior distribution.* $P(X|\theta)$ is known as the *likelihood* (the probability of the data given the parameters) and $P(\theta)$ is known as the *prior.* $P(X)$ is often known as the normalizing constant and thanks to the total law of probability, can be written as $\int P(X|\theta)P(\theta)d\theta$. However, this is often very hard to find, and is also a constant, so often one will see that
+
+$$
+P(\theta|X) \propto P(X|\theta)P(\theta)
+$$
+
+Where $\propto$ means \`\`proportional to.'' Usually, $P(\theta)$ will be set beforehand based on prior knowledge. Or it will be set to a neutral condition to signifiy no knowledge. And then $P(X|\theta)$ can be calculated using maximum likelihood, which is where we use the condition of independence to calculate the most likely parameter $\theta$. See my blog post on maximum likelihood [here](https://drodriguezchavez.github.io/stat-blog/maximum-likelihood.html).
+
+### When do we use Bayes' Theorem?
+ 
+### Logistic Regression
+
+The covariates change the log-odds of an event. 
+
+```{r}
+prob.pi <- seq(0, 1, length.out = 200)
+prob.pi.odds <- prob.pi/ (1-prob.pi)
+prob.pi.logodds <- log(prob.pi.odds)
+
+plot(prob.pi, rep(0, 200), col = 'blue', pch = 19, ylim = c(-8, 15)) + 
+  points(prob.pi, prob.pi.odds, col = 'green', pch = 19) +
+  points(prob.pi, prob.pi.logodds, col = 'red', pch = 19) 
+```
+
+### Poisson Regression
+
+### 

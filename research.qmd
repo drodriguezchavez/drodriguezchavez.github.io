@@ -1,0 +1,49 @@
+---
+title: "Research"
+linkcolor: green
+title-block-banner: images/about-header.png
+title-block-banner-color: white
+include-in-header:
+  - text: |
+      <style>
+      .quarto-title-block .quarto-title-banner {
+        background-position-y: center;
+        height: 200px;
+      }
+      </style>
+---
+
+A classmate of mine in undergrad once told me that there are models that fit functions to data and then there are models that describe a theoretical framework but may not match data perfectly. The former by definition needs data while the latter can use data to corroborate theory. I am interested in gaining skills to do both of these!
+
+### Current Work
+
+Currently, I am exploring the spatio-temporal relationships between dengue and zika in Brazil from 2016-present. I am interested in learning how statistical models can better understand these interactions for forecasting and use dynamical systems modeling to better understand multi-pathogen systems. *This work is being done in collaboration with [Ayesha Mahmud](https://ayeshamahmud.github.io).*
+
+### Publications
+
+-   de Marez, C., J. Callies, B. Haines, D. Rodriguez-Chavez, and J. Wang, 2023: Observational Constraints on the Submesoscale Sea Surface Height Variance of Balanced Motion. J. Phys. Oceanogr., 53, 1221--1235, <https://doi.org/10.1175/JPO-D-22-0188.1.>
+
+-   Lee, S., D. Rodriguez-Chavez, and J. Rzeszotarski, 2023: Exploring the Effects of Personal Impact Communicated Through Eco-Feedback Technology for Reducing Food Waste. In: Marcus, A., Rosenzweig, E., Soares, M.M. (eds) Design, User Experience, and Usability. HCII 2023. Lecture Notes in Computer Science, vol 14030. Springer, Cham. <https://doi.org/10.1007/978-3-031-35699-5_39>
+
+### Presentations
+
+-   December 2025: TBD, Epidemics
+
+-   June 2025: "Testing theories of cross-immunity and cross-reactivity on mosquito-borne diseases using a dynamical systems approach" at EEID
+
+### Awards
+
+-   2023 National Science Foundation Graduate Research Fellow
+-   2023 UC Berkeley Chancellor's Fellow
+-   2022 Poster Winner at Los Alamos National Laboratory Student Symposium
+-   2022 Best Poster at Int. Symposium on Physiological Processes in Roots of Woody Plants
+-   2021-2022 Recipient for the Ann S. and Robert R. Morley Student Research Fund Grant
+-   2021 Best Undergraduate Presenter at AGEP Student Success Conference
+
+### Previous Work
+
+-   Undergraduate researcher in the Department of Natural Resources & The Environment at Cornell University. *Advised by [Marc Goebel](https://blogs.cornell.edu/marcgoebel/publications/).*
+
+-   Computational Sciences Intern at the Los Alamos National Laboratory Information Systems and Modeling (A-1) Group. *Mentored by [Morgan Gorris](https://www.lanl.gov/search-capabilities/profiles/morgan-gorris.shtml) and [Andrew Bartlow](https://www.lanl.gov/search-capabilities/profiles/andrew-bartlow.shtml).*
+
+-   WAVE Fellow at the California Institute of Technology. *Mentored by [Joern Callies](https://jcallies.com).*
