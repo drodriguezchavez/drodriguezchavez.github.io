@@ -18,65 +18,244 @@ We can thus set these two conditional probabilities equal to each other and get 
 
 $$
  P(A|B) = \frac{P(B|A)P(A)}{P(B)}
-$$ Bayes' theorem has been revolutionary in the field of statistics. Given evidence (or data) *X* and parameters $\theta$, the above theorem is often written in the form
+$$
+
+### When do we use Bayes' Theorem?
+
+Bayes' theorem has been revolutionary in the field of statistics. Given evidence (or data) *X* and parameters $\theta$, the above theorem is often written in the form
 
 $$
 P(\theta|X) = \frac{P(X|\theta)P(\theta)}{P(X)}
-$$ Where $P(\theta|X)$ can be viewed as the probability of the parameters given the data. In Bayesian statistics, it is also known as the *posterior distribution.* $P(X|\theta)$ is known as the *likelihood* (the probability of the data given the parameters) and $P(\theta)$ is known as the *prior.* $P(X)$ is often known as the normalizing constant and thanks to the total law of probability, can be written as $\int P(X|\theta)P(\theta)d\theta$. However, this is often very hard to find, and is also a constant, so often one will see that
+$$
+
+Where $P(\theta|X)$ can be viewed as the probability of the parameters given the data. In Bayesian statistics, it is also known as the **posterior distribution.** $P(X|\theta)$ is known as the **likelihood** (the probability of the data given the parameters) and $P(\theta)$ is known as the **prior.** $P(X)$ is often known as the normalizing constant and thanks to the total law of probability, can be written as $\int P(X|\theta)P(\theta)d\theta$. However, this is often very hard to find, and is also a constant, so often one will see that
 
 $$
 P(\theta|X) \propto P(X|\theta)P(\theta)
 $$
 
-Where $\propto$ means \`\`proportional to.'' Usually, $P(\theta)$ will be set beforehand based on prior knowledge. Or it will be set to a neutral condition to signifiy no knowledge. And then $P(X|\theta)$ can be calculated using maximum likelihood, which is where we use the condition of independence to calculate the most likely parameter $\theta$. See my blog post on maximum likelihood [here](https://drodriguezchavez.github.io/stat-blog/maximum-likelihood.html).
+Where $\propto$ means ''proportional to.'' Usually, $P(\theta)$ will be set beforehand based on prior knowledge. Or it will be set to a neutral condition to signify no additional knowledge. And then $P(X|\theta)$ can be calculated using maximum likelihood, which is where we calculate the most likely parameter $\theta$. See my blog post on maximum likelihood [here](https://drodriguezchavez.github.io/stat-blog/maximum-likelihood.html).
 
-### When do we use Bayes' Theorem?
- 
-### Logistic Regression
-Logistic regression a way of modeling a binary outcome (i.e. an event happening or not). 
+### Generalized Linear Models
 
-$$
-Y_i | X_i \sim Binomial(\pi)
-$$
-The covariates change the log-odds of an event. 
+A generalized linear model is a generalization of linear regression that allows one to model a non-linear predictive relationship between $X$ and $Y$. Two obvious examples are logistic regression (where we want to model a binary outcome) or a Poisson regression (where we want to model counts). 
 
-In linear regression, the slope had an additive effect, in logistic regression, the effect is multiplicative. if $\beta_1 < 0$, it is a protective factor. Decreases the odds of the event happening. If $\beta_1 > 0$, it is a risk factor and increases the odds of the event happening. 
+<!-- ### Logistic Regression -->
 
-$$
-log(\frac{\pi}{1-\pi}) = \beta_0 + \beta_1 X
-$$
+<!-- Logistic regression a way of modeling a binary outcome (i.e. an event happening or not). -->
 
-```{r}
-prob.pi <- seq(0, 1, length.out = 200)
-prob.pi.odds <- prob.pi/ (1-prob.pi)
-prob.pi.logodds <- log(prob.pi.odds)
+<!-- $$ -->
 
-plot(prob.pi, rep(0, 200), col = 'blue', pch = 19, cex = 0.3, ylim = c(-8, 15)) + 
-  points(prob.pi, prob.pi.odds, col = 'green', pch = 19, cex = 0.3) +
-  points(prob.pi, prob.pi.logodds, col = 'red', pch = 19, cex = 0.3) 
-```
+<!-- Y_i | X_i \sim Binomial(\pi) -->
 
-How do you estimate these parameters? 
-Maximum likelihood estimation!
+<!-- $$ The covariates change the log-odds of an event. -->
 
-```{r}
-vaping <- c(rep(0, 20), rep(1, 20))
-logodds <- 0.5 + 0.5 * vaping
-prob.pi <- 1 / (1 + exp(-logodds))
-Y <- rbinom(40, size = 1, prob = prob.pi)
+<!-- In linear regression, the slope had an additive effect, in logistic regression, the effect is multiplicative. if $\beta_1 < 0$, it is a protective factor. Decreases the odds of the event happening. If $\beta_1 > 0$, it is a risk factor and increases the odds of the event happening. -->
 
-fit <- glm(Y ~ vaping, family = binomial)
-summary(fit)
-```
+<!-- $$ -->
 
+<!-- log(\frac{\pi}{1-\pi}) = \beta_0 + \beta_1 X -->
+
+<!-- $$ -->
+
+<!-- ```{r} -->
+
+<!-- prob.pi <- seq(0, 1, length.out = 200) -->
+
+<!-- prob.pi.odds <- prob.pi/ (1-prob.pi) -->
+
+<!-- prob.pi.logodds <- log(prob.pi.odds) -->
+
+<!-- plot(prob.pi, rep(0, 200), col = 'blue', pch = 19, cex = 0.3, ylim = c(-8, 15)) +  -->
+
+<!--   points(prob.pi, prob.pi.odds, col = 'green', pch = 19, cex = 0.3) + -->
+
+<!--   points(prob.pi, prob.pi.logodds, col = 'red', pch = 19, cex = 0.3)  -->
+
+<!-- ``` -->
+
+<!-- How do you estimate these parameters? Maximum likelihood estimation! -->
+
+<!-- ```{r} -->
+
+<!-- vaping <- c(rep(0, 20), rep(1, 20)) -->
+
+<!-- logodds <- 0.5 + 0.5 * vaping -->
+
+<!-- prob.pi <- 1 / (1 + exp(-logodds)) -->
+
+<!-- Y <- rbinom(40, size = 1, prob = prob.pi) -->
+
+<!-- fit <- glm(Y ~ vaping, family = binomial) -->
+
+<!-- summary(fit) -->
+
+<!-- ``` -->
 
 ### Poisson Regression
 
+Poisson regression deals with count data. The model formulation with one covariate typically looks like the one below. An intuitive explanation for why we log-transform, is because we know that for a Poisson distribution, $\lambda \geq 0$. But we want to be open to different values of $\beta_0, \beta_1$, and $X_i$, thus we log-transform so that way we can switch back and forth from the domain of the positives (where $\lambda_i$ lives) to the domain of the reals (where \beta\_0 + \beta\_1 X_i can live).
+
 $$
-Y \sim Poisson(\lambda) \\\\
-log(\lambda) = \beta_0 + \beta_1 X
+\begin{align}
+Y_i \sim Poisson(\lambda_i) \\
+log(\lambda_i) = \beta_0 + \beta_1 X_i
+\end{align}
 $$
+
+```{r, poission regression simulation}
+# setting up our model parameters 
+N <- 100
+beta0 <- 1
+beta1 <- 2
+X <- runif(N, 0, 1)
+lambda <- exp(beta0 + beta1 * X)
+
+# getting our observations
+Y <- rpois(N, lambda = lambda)
+
+# plotting 
+plot(Y ~ X)
+```
+
+### How do we estimate these parameters?
+
+First let's take a look at the Poisson distribution:
+
+$$
+P(Y | \lambda) = \frac{e^{-\lambda} \lambda^y}{y!}
+$$ In maximum likelihood, we have assumed that our data is independent and each point is coming from a Poisson distribution. The probability of the exact realization of our data is the same as multiplying the probability mass function of each data point together. $$
+\mathcal{L}(\lambda | Y) = P(Y = y_i | \lambda) = \Pi_{i=1}^n \frac{ \lambda^{y_i} }{y_i !} e^{- \lambda}
+$$ This is known as our **likelihood function**. We want to find $\lambda$ that maximizes this function. *Note that to make this calculation easier, and because we are assuming there is one maximum, we usually use the log-likelihood instead.*
+
+$$
+\begin{align}
+\text{ln} \hspace{1mm} \mathcal{L}(\lambda | Y) &= \sum_1^n (y_i*log(\lambda) +log(e^{-\lambda}) - log(y_i!))
+\\
+&= \sum_1^n (y_i*log(\lambda) -\lambda - log(y_i!))
+\end{align}
+$$ However, let's first re-write this in terms of linear model. We have defined our $y_i$'s to come from a Poisson distribution where $\lambda = e^{(\beta_0 + \beta_1 * x_i)}$. Thus we have that
+
+$$
+\begin{align}
+\text{ln} \hspace{1mm} \mathcal{L}(\lambda | Y) &= \sum_1^n (y_i*log(\lambda) -\lambda - log(y_i!))
+\\ &= \sum_1^n (y_i*log(e^{(\beta_0 + \beta_1 * x_i)}) -e^{(\beta_0 + \beta_1 * x_i)} - log(y_i!))
+\\ &= \sum_1^n (y_i*(\beta_0 + \beta_1 * x_i) -e^{(\beta_0 + \beta_1 * x_i)} - log(y_i!))
+\end{align}
+$$ To maximize a function, one takes the derivative, sets the function equal to 0, and solve. This would mean solving for both of these equations.
+
+$$
+\begin{align}
+\frac{d}{d \beta_0} \text{ln} \hspace{1mm} \mathcal{L}(\beta_0, \beta_1) &=
+\sum_1^n y_i-e^{\beta_0 + \beta_1 x_i}
+\\ \frac{d}{d \beta_1} \text{ln} \hspace{1mm} \mathcal{L}(\beta_0, \beta_1) &=
+\sum_1^n y_i x_i - x_i e^{\beta_0 + \beta_1 x_i}
+\end{align}
+$$
+
+However instead of trying to solve this two-dimensional system, we can use the optim function in r. *Note that the optim function takes in a function and minimizes it.*
+
+```{r, looking at optim}
+# creating our log-likelihood function
+llh <- function(theta) {
+  b0 <- theta[1]
+  b1 <- theta[2]
+  -(sum(Y*(b0 + b1*X)) - sum(exp(b0+b1*X)) - sum(log(factorial(Y)))) # we negate it to get the maximum
+}
+
+llh.estimates <- optim(c(1,1), llh, hessian = T)
+llh.estimates$par
+```
+
+These are our estimates, otherwise known as our **maximum likelihood estimates (MLEs)**.
+
+### What about our standard errors?
+
+In textbooks it is common to see that $\hat{\theta} \sim N(\theta, I^{-1}(\theta))$, where $\theta$ is a vector of parameters (in our case $(\beta_0$ and $\beta_1$) and $I(\theta)$ is what is known as the information matrix and is the negative of the Hessian matrix evaluated at our MLEs. The Hessian is the matrix of second-order partial derivatives and intuitively we can think of them as the curvature of the function. If our likelihood function gives us a surface where we have $\beta_0$ and $\beta_1$ as the x-y axis and the output of the log-likelihood as the z-axis, then the Hessian gives us the curvature at each point on this surface.
+
+```{r, looking at the surface}
+b0 <- seq(0, 2, length = 30)
+b1 <- seq(1, 3, length = 30)
+
+llh_grid <- function(b0, b1) {
+  llh(c(b0, b1))
+}
+
+# Create a grid matrix
+z <- outer(b0, b1, Vectorize(llh_grid))
+
+# Draw the 3D surface
+persp(b0, b1, -z, 
+      theta = 10, phi = 27,      # viewing angles
+      col = "lightblue",         # surface color
+      shade = 0.5,               # shading intensity
+      xlab = 'b0', ylab = 'b1', zlab = "llh(b0, b1)",
+      main = "log-likelihood surface")
+
+```
+
+We can construct our Hessian from our log-likelihood partial derivatives.
+
+$$
+H = \begin{bmatrix}
+\frac{d^2}{d \beta_0^2} \text{ln} \hspace{1mm} \mathcal{L}(\beta_0, \beta_1) &
+\frac{d}{d \beta_0 \beta_1} \text{ln} \hspace{1mm} \mathcal{L}(\beta_0, \beta_1) \\
+\frac{d}{d \beta_1 \beta_0} \text{ln} \hspace{1mm} \mathcal{L}(\beta_0, \beta_1) &
+\frac{d^2}{d \beta_1^2} \text{ln} \hspace{1mm} \mathcal{L}(\beta_0, \beta_1)
+\end{bmatrix}
+=
+\begin{bmatrix}
+\sum -e^{\beta_0 + \beta_1 x_i} & \sum-x_i e^{\beta_0 + \beta_1 x_i} \\
+\sum - x_i e^{\beta_0 + \beta_1 x_i} & \sum-x^2 e^{\beta_0 + \beta_1 x_i}
+\end{bmatrix}
+$$
+
+Again, we can solve this at our estimates we previously got. We can also check this with the optim function from before.
+
+```{r}
+H <- function(b0, b1) {
+  matrix(c( -sum(exp(b0 + b1*X)) , -sum(X*exp(b0+b1*X)), 
+           -sum(X*exp(b0+b1*X)) , -sum(X^2*exp(b0+b1*X)) ), 
+         nrow = 2, byrow = T)
+}
+
+# getting our var-covar matrix
+H(llh.estimates$par[1], llh.estimates$par[2])
+# comparing with optim (we have to negate bc optim finds the minimum)
+-llh.estimates$hessian 
+```
+
+Finally, as mentioned previously: $\hat{\theta} \sim N(\theta, I^{-1}(\theta))$. So to get our estimated standard error, we take the square root of the diagonals of the variance-covariance matrix that is $I^{-1}(\theta) = -H^{-1}$.
+
+```{r, getting the standard errors}
+# check sqrt(diag(inverse -hessian)) with glm std. errors of param estim
+llh.se <- sqrt(diag(solve(-H(llh.estimates$par[1], llh.estimates$par[2]))))
+llh.se
+```
+
+### Comparing our estimates and standard errors with R
+
+We see that we get very similar values! We can chalk up the differences in the hundredths/thousandths place to the (probably more efficient) MLE machinery that R uses to calculate these estimates.
+
+```{r, our estimates}
+# beta0 and beta1
+llh.estimates$par 
+
+# beta0 and beta1 standard errors 
+llh.se
+```
+
+```{r, looking at the summary fit}
+fit <- glm(Y ~ X, family=poisson)
+summary(fit)
+```
 
 ### Additional Resources
 
-- Very Normal on Logistic Regression: https://www.youtube.com/watch?v=Iju8l2qgaJU 
+-   Great introductory video on generalized linear models: <https://www.youtube.com/watch?v=1fZeBafD1nw>
+-   Great video on Logistic Regression: <https://www.youtube.com/watch?v=Iju8l2qgaJU>
+-   My blog post on Maximum Likelihood: <https://drodriguezchavez.github.io/stat-blog/maximum-likelihood.html>
+-   Nice introduction to Maximum Likelihood: [https://medium.com/\@dataforyou/maximum-likelihood-estimation-the-poisson-distribution-3ac952f4c36b](https://medium.com/@dataforyou/maximum-likelihood-estimation-the-poisson-distribution-3ac952f4c36b)
+- An addition book on regression: [https://empirical-methods.com/poisson-regression-and-mle.html](https://empirical-methods.com/poisson-regression-and-mle.html)
+
+

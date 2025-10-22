@@ -33,7 +33,7 @@ polygon(c(seq(-3, VAL, 0.01),
 abline(v = VAL, lty = 2)
 ```
 
-As we can see, $\alpha$ and $\beta$ are a trade-off with each other. As $\alpha$ increases, $\beta$ decreases. See what happens with a decreased, or more strict, $\alpha$ of 0.01.
+As we can see, $\alpha$ and $\beta$ trade-off with each other. As $\alpha$ increases, $\beta$ decreases. See what happens with a decreased, or more strict, $\alpha$ of 0.01.
 
 ```{r, plotting alpha and beta again}
 # plotting alpha 
