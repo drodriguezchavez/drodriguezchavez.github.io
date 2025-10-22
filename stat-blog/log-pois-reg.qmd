@@ -33,7 +33,11 @@ Where $\propto$ means \`\`proportional to.'' Usually, $P(\theta)$ will be set be
 ### When do we use Bayes' Theorem?
  
 ### Logistic Regression
+Logistic regression a way of modeling a binary outcome (i.e. an event happening or not). 
 
+$$
+Y_i | X_i \sim Binomial(\pi)
+$$
 The covariates change the log-odds of an event. 
 
 In linear regression, the slope had an additive effect, in logistic regression, the effect is multiplicative. if $\beta_1 < 0$, it is a protective factor. Decreases the odds of the event happening. If $\beta_1 > 0$, it is a risk factor and increases the odds of the event happening. 
@@ -67,6 +71,11 @@ summary(fit)
 
 
 ### Poisson Regression
+
+$$
+Y \sim Poisson(\lambda) \\\\
+log(\lambda) = \beta_0 + \beta_1 X
+$$
 
 ### Additional Resources
 

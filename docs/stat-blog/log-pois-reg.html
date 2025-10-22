@@ -5011,7 +5011,10 @@ P(\theta|X) \propto P(X|\theta)P(\theta)
 </section>
 <section id="logistic-regression" class="level3">
 <h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
-<p>The covariates change the log-odds of an event.</p>
+<p>Logistic regression a way of modeling a binary outcome (i.e. an event happening or not).</p>
+<p><span class="math display">\[
+Y_i | X_i \sim Binomial(\pi)
+\]</span> The covariates change the log-odds of an event.</p>
 <p>In linear regression, the slope had an additive effect, in logistic regression, the effect is multiplicative. if <span class="math inline">\(\beta_1 &lt; 0\)</span>, it is a protective factor. Decreases the odds of the event happening. If <span class="math inline">\(\beta_1 &gt; 0\)</span>, it is a risk factor and increases the odds of the event happening.</p>
 <p><span class="math display">\[
 log(\frac{\pi}{1-\pi}) = \beta_0 + \beta_1 X
@@ -5050,15 +5053,17 @@ Call:
 glm(formula = Y ~ vaping, family = binomial)
 
 Coefficients:
-             Estimate Std. Error z value Pr(&gt;|z|)
-(Intercept) 3.002e-16  4.472e-01   0.000    1.000
-vaping      1.099e+00  6.831e-01   1.608    0.108
+              Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)  8.473e-01  4.879e-01   1.736   0.0825 .
+vaping      -7.518e-16  6.901e-01   0.000   1.0000  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 52.925  on 39  degrees of freedom
-Residual deviance: 50.219  on 38  degrees of freedom
-AIC: 54.219
+    Null deviance: 48.869  on 39  degrees of freedom
+Residual deviance: 48.869  on 38  degrees of freedom
+AIC: 52.869
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
@@ -5066,6 +5071,10 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </section>
 <section id="poisson-regression" class="level3">
 <h3 class="anchored" data-anchor-id="poisson-regression">Poisson Regression</h3>
+<p><span class="math display">\[
+Y \sim Poisson(\lambda) \\\\
+log(\lambda) = \beta_0 + \beta_1 X
+\]</span></p>
 </section>
 <section id="additional-resources" class="level3">
 <h3 class="anchored" data-anchor-id="additional-resources">Additional Resources</h3>

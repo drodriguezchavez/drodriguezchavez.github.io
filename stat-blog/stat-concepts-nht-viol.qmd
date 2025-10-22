@@ -6,70 +6,112 @@ Keywords: "power, type I and type II errors, breakdown of linear regression"
 
 ### Type I vs. Type II errors, why do we care?
 
-A type-I error is when one incorrectly rejects the null hypothesis, even though it is true. A common analogy for a type-I error is when a court rules that a defendant is guilty even though they are innocent. The type-I error conditions on the null hypothesis being true. The probability of a type-I error is usually denoted as $\alpha$. The usual threshold for this is 0.05. We see $\alpha$ in pink below. 
+A type-I error is when one incorrectly rejects the null hypothesis, even though it is true. A common analogy for a type-I error is when a court rules that a defendant is guilty even though they are innocent. The type-I error conditions on the null hypothesis being true. The probability of a type-I error is usually denoted as $\alpha$. The usual threshold for this is 0.05.
 
-A type-II error is when one incorrectly fails to reject the null even though the alternative hypothesis is true. A common analogy for a type-II error is when a court fails to convict a guilty person. The type-II error conditions on the alternative hypothesis being true. The probability of a type-II error is usually denoted as $\beta$. The usual threshold for this is 0.20. We see $\beta$ in blue below. 
+A type-II error is when one incorrectly fails to reject the null even though the alternative hypothesis is true. A common analogy for a type-II error is when a court fails to convict a guilty person. The type-II error conditions on the alternative hypothesis being true. The probability of a type-II error is usually denoted as $\beta$. The usual threshold for this is 0.20. We see $\beta$ in blue below.
 
-```{r, plotting alpha}
-plot(seq(-3, 6, 0.01), dt(seq(-3, 6, 0.01), 100), cex = 0.3)
+The plot below shows both the null distribution centered at 0 with an alternative distribution centered around 3. In pink is the customary $\alpha$ level of 0.05 (also marked with the dashed line) Given this $\alpha$ level, we have our $\beta$ (or probability of type-II error) in the shaded blue region.
 
+```{r, plotting alpha and beta}
 # plotting alpha 
-DISTR <- qt(0.95, 100)
-polygon(c(seq(DISTR, 6, 0.01), 
-          rev(seq(DISTR, 6, 0.01))),
-        c(rep(0, length(seq(DISTR, 6, 0.01))), 
-          rev(dt(seq(DISTR, 6, 0.01), 100))),
+plot(seq(-3, 6, 0.01), dt(seq(-3, 6, 0.01), 100), cex = 0.3)
+VAL <- qt(0.95, 100)
+polygon(c(seq(VAL, 6, 0.01), 
+          rev(seq(VAL, 6, 0.01))),
+        c(rep(0, length(seq(VAL, 6, 0.01))), 
+          rev(dt(seq(VAL, 6, 0.01), 100))),
         col = adjustcolor('pink', alpha = 0.7), border = NA)
 
 # plotting beta 
 points(seq(-3, 6, 0.01), dt(seq(-3, 6, 0.01), 100, ncp = 3), cex = 0.3)
-polygon(c(seq(-3, qt(0.2, 100, ncp = 3), 0.01), 
-          rev(seq(-3, qt(0.2, 100, ncp = 3), 0.01))),
-        c(rep(0, length(seq(-3, qt(0.2, 100, ncp = 3), 0.01))), 
-          rev(dt(seq(-3, qt(0.2, 100, ncp = 3), 0.01), 100, ncp = 3))),
+polygon(c(seq(-3, VAL, 0.01), 
+          rev(seq(-3, VAL, 0.01))),
+        c(rep(0, length(seq(-3, VAL, 0.01))), 
+          rev(dt(seq(-3, VAL, 0.01), 100, ncp = 3))),
         col = adjustcolor('blue', alpha = 0.3), border = NA)
+
+abline(v = VAL, lty = 2)
+```
+
+As we can see, $\alpha$ and $\beta$ are a trade-off with each other. As $\alpha$ increases, $\beta$ decreases. See what happens with a decreased, or more strict, $\alpha$ of 0.01.
+
+```{r, plotting alpha and beta again}
+# plotting alpha 
+plot(seq(-3, 6, 0.01), dt(seq(-3, 6, 0.01), 100), cex = 0.3)
+VAL <- qt(0.99, 100)
+polygon(c(seq(VAL, 6, 0.01), 
+          rev(seq(VAL, 6, 0.01))),
+        c(rep(0, length(seq(VAL, 6, 0.01))), 
+          rev(dt(seq(VAL, 6, 0.01), 100))),
+        col = adjustcolor('pink', alpha = 0.7), border = NA)
+
+# plotting beta 
+points(seq(-3, 6, 0.01), dt(seq(-3, 6, 0.01), 100, ncp = 3), cex = 0.3)
+polygon(c(seq(-3, VAL, 0.01), 
+          rev(seq(-3, VAL, 0.01))),
+        c(rep(0, length(seq(-3, VAL, 0.01))), 
+          rev(dt(seq(-3, VAL, 0.01), 100, ncp = 3))),
+        col = adjustcolor('blue', alpha = 0.3), border = NA)
+
+abline(v = VAL, lty = 2)
 ```
 
 ### What is power?
 
-Looking at the type-II error more in depth, we can rewrite that given the alternative hypothesis is true, $P(not \hspace{1mm} reject \hspace{1mm} H_0 | H_A) = \beta$ as $P(reject \hspace{1mm} H_0 | H_A) = 1 - \beta$. This is also known as power! In other words, the probability of rejecting the null hypothesis assuming that the alternative hypothesis is true.
+Looking at the type-II error more in depth, we can rewrite that given the alternative hypothesis is true, $P(not \hspace{1mm} reject \hspace{1mm} H_0 | H_A) = \beta$ as $P(reject \hspace{1mm} H_0 | H_A) = 1 - \beta$. This is also known as power! In other words, the probability of rejecting the null hypothesis assuming that the alternative hypothesis is true. Given $\alpha = 0.05$ significance threshold, we see the power highlighted in gray below. Here we have a power of about 91%.
+
+```{r, plotting power}
+VAL <- qt(0.95, 100)
+
+plot(seq(-3, 6, 0.01), dt(seq(-3, 6, 0.01), 100), cex = 0.3)
+points(seq(-3, 6, 0.01), dt(seq(-3, 6, 0.01), 100, ncp = 3), cex = 0.3)
+polygon(c(seq(VAL, 6, 0.01), 
+          rev(seq(VAL, 6, 0.01))),
+        c(rep(0, length(seq(VAL, 6, 0.01))), 
+          rev(dt(seq(VAL, 6, 0.01), 100, ncp = 3))),
+        col = adjustcolor('gray', alpha = 0.3), border = NA)
+
+abline(v = VAL, lty = 2)
+
+# calculating our power given this alternative hypothesis
+1 - pt(VAL, 100, ncp = 3)
+```
 
 **What factors influence power?**
 
 -   **Significance level:** As the $\alpha$ threshold decreases (becomes more strict), this decreases the critical region for an alternative hypothesis, thereby decreasing power. There is a trade-off between type-I error control and power.
 
--   **Treatment effect:** GIven a $\delta$ that represents the difference between the null hypothesis and the alternative hypothesis, given a critical value *T*, if $\delta$ is small, then the critical region will be much smaller than if $\delta$ was larger. If we categorize $\delta$ as a treatment effect, we say that small treatment effects are hard to distinguish.
+-   **Treatment effect:** Given a $\delta$ that represents the difference between the null hypothesis and the alternative hypothesis, given a critical value *T*, if $\delta$ is small, then the critical region will be much smaller than if $\delta$ was larger. If we categorize $\delta$ as a treatment effect, we say that small treatment effects are hard to distinguish.
 
--   **Population variance:** the variance of our test-statistic is controlled by the actual population variance and the sample size. If the actual populataion variance is large, the null and alternative distribution will potentially overlap more, both pushing the critical value potentially more into the critical region, but it is unclear the effects. Potentially a net negative effect on power.
+-   **Population variance:** the variance of our test-statistic is controlled by the actual population variance and the sample size. If the actual population variance is large, the null and alternative distribution will potentially overlap more, both pushing the critical value potentially more into the critical region, but it is unclear the effects. Potentially a net negative effect on power.
 
 -   **Sample size:** However if we increase our sample size, the overall variance of our null and alternative distributions will shrink. This means that the critical value will shift towards 0 and more of the alternative distribution centers around $\delta$. Thus, higher sample size means higher power.
 
-<!-- simulate sigma/root(n) what happens as we change for n. change variance of x. sample size. sigma. what x looks like. -->
+### Relationship between errors and confidence intervals
 
-### Violations of linear regression 
+Recall that give an $\alpha$ significance threshold, our confidence intervals of $(1-\alpha)$% are $\hat{\beta} \pm qt(1 - \alpha/2)*SE(\hat{\beta})$. We see below that the larger (or more lenient) the significance threshold, the confidence interval will be thinner but the more power we will have. Alternatively, as the significance threshold decreases (becomes more strict), we decrease our power and widen our confidence intervals.
 
-**Linearity:**
-Recall that our estimates for $\beta$ are solved by minimizing the least squares equation 
-$$
+```{r}
+qt(1- 0.01/2, 100)
+qt(1- 0.05/2, 100)
+qt(1- 0.1/2, 100)
+```
+
+### Violations of linear regression
+
+**Linearity:** Recall that our estimates for $\beta$ are solved by minimizing the least squares equation $$
 min \hspace{1mm} \Sigma_{i=1}^n (Y_i - [\beta_0 + \beta_1 X_i])^2
-$$
-The assumption in the least squares solution here is that the model is linear. Solving this, we get that 
-$$
+$$ The assumption in the least squares solution here is that the model is linear. Solving this, we get that $$
 \vec{\hat{\beta}} = (X^T X)^{-1} X^T Y
-$$
-However, if the assumption of linearity is violated, then these estimates will be biased. Because these estimates will be biased, this means that both our predicted values $Y$, our errors $\vec{\epsilon} = (I-H)*Y$, and our variance $\vec{\epsilon}^T \vec{\epsilon} / (n-p)$ will also be biased. 
+$$ However, if the assumption of linearity is violated, then these estimates will be biased. Because these estimates will be biased, this means that both our predicted values $Y$, our errors $\vec{\epsilon} = (I-H)*Y$, and our variance $\vec{\epsilon}^T \vec{\epsilon} / (n-p)$ will also be biased.
 
-**Homoskedasticity:**
-This assumptions is that the variance of the errors is the same. This implies that 
-$$
+**Homoskedasticity:** This assumptions is that the variance of the errors is the same. This implies that $$
 Var(Y) = Var(\vec{\epsilon}) = \sigma^2 *I
-$$
-where $I$ is the identity matrix. Additionally, our variance for our $\beta$'s can be written as 
+$$ where $I$ is the identity matrix. Additionally, our variance for our $\beta$'s can be written as
 
 $$
 Var(\beta) = \sigma^2 * I * (X^TX)^{-1}
-$$
-Thus if our errors are not the same, this means that we would have a diagonal matrix with different variances like the one below:
+$$ Thus if our errors are not the same, this means that we would have a diagonal matrix with different variances like the one below:
 
 $$
 \begin{bmatrix}
@@ -80,31 +122,29 @@ $$
 \end{bmatrix} 
 $$
 
-Which would mean that not only our variance of the errors is biased, but also our variance for our estimates of $\hat{\beta}$ and their subsequent standard errors will also be biased. 
+Which would mean that not only our variance of the errors is biased, but also our variance for our estimates of $\hat{\beta}$ and their subsequent standard errors will also be biased.
 
-**Independence:**
-We see up above that 
-$$
+**Independence:** We see up above that $$
 Var(\beta) = \sigma^2 * I * (X^TX)^{-1}
-$$
-However, if there is dependence between the errors, we have to account for this by a covariance-matrix $\Sigma$, meaning that our variance is unsimplified to 
-$$
+$$ However, if there is dependence between the errors, we have to account for this by a covariance-matrix $\Sigma$, meaning that our variance is unsimplified to $$
 Var(\beta) = (X^T X)^{-1} X^T * \Sigma * ( (X^T X)^{-1} X^T )^T
-$$
-Thus if we violate the assumptions of homoskedasticity, the variance and standard errors of our estimates will be biased. Having high multicollinearity means that our standard errors for our estimates will be higher, thus making our test statistic in typical linear regression smaller and our p-value thus bigger. 
+$$ Thus if we violate the assumptions of homoskedasticity, the variance and standard errors of our estimates will be biased. Having high multicollinearity means that our standard errors for our estimates will be higher, thus making our test statistic in typical linear regression smaller and our p-value thus bigger.
 
-**Normally distributed:**
-Because we've assumed our errors are Normally distributed, if this is violated then when calculating our test-statistic for our hypothesis test, we can no longer say that it comes from a t-distribution. Thus not only will our test-statistic and subsequent p-value will be invalid, but our confidence interval will also be invalid since it assumes our test statistic comes from a t-distribution. 
+**Normally distributed:** Because we've assumed our errors are Normally distributed, if this is violated then when calculating our test-statistic for our hypothesis test, we can no longer say that it comes from a t-distribution. Thus not only will our test-statistic and subsequent p-value will be invalid, but our confidence interval will also be invalid since it assumes our test statistic comes from a t-distribution.
 
-### What happens to our confidence intervals? 
-Because we calculate our confidence intervals using the standard error of our estimates, from above that if linearity is violated, both the estimates and confidence intervals will be invalid. If homoskedasticity or independence is violated, the standard errors and thus our test-statistic, p-values, and confidence intervals will be invalid. If linearity is invalid, then the test statistic, p-value, and confidence interval will be invalid. 
+### What happens to our confidence intervals?
 
-Invalid meaning that we can no longer say with $(1-\alpha)$% certainty that the interval will contain the true parameter. 
+Because we calculate our confidence intervals using the standard error of our estimates, from above that if linearity is violated, both the estimates and confidence intervals will be invalid. If homoskedasticity or independence is violated, the standard errors and thus our test-statistic, p-values, and confidence intervals will be invalid. If linearity is invalid, then the test statistic, p-value, and confidence interval will be invalid.
+
+Invalid meaning that we can no longer say with $(1-\alpha)$% certainty that the interval will contain the true parameter.
 
 ### What happens to our type-I and type-II errors?
 
+Because our errors are based on the null distribution of the test statistic and alternative distribution, if the normality assumption is violated, then we can no longer assume our $\alpha$ and subsequent $\beta$ levels are actually what we have stated.
 
 ### Additional Resources
 
 -   Video on power: <https://www.youtube.com/watch?v=KPWzdtOMhTY>
-- On regression: https://stats.stackexchange.com/questions/29731/regression-when-the-ols-residuals-are-not-normally-distributed/29748#29748 
+-   Some fun slides on power and confidence intervals: <https://www.sjsu.edu/people/steven.macramalla/courses/stats95/lecture%208%20--%20Confidence%20intervals%20FX%20Power%20Significance.pdf>
+-   On calculating power: <http://vanbelle.org/chapters/webchapter2.pdf>
+-   On regression: <https://stats.stackexchange.com/questions/29731/regression-when-the-ols-residuals-are-not-normally-distributed/29748#29748>
