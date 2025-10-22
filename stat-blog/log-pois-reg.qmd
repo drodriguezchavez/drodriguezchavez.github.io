@@ -36,16 +36,38 @@ Where $\propto$ means \`\`proportional to.'' Usually, $P(\theta)$ will be set be
 
 The covariates change the log-odds of an event. 
 
+In linear regression, the slope had an additive effect, in logistic regression, the effect is multiplicative. if $\beta_1 < 0$, it is a protective factor. Decreases the odds of the event happening. If $\beta_1 > 0$, it is a risk factor and increases the odds of the event happening. 
+
+$$
+log(\frac{\pi}{1-\pi}) = \beta_0 + \beta_1 X
+$$
+
 ```{r}
 prob.pi <- seq(0, 1, length.out = 200)
 prob.pi.odds <- prob.pi/ (1-prob.pi)
 prob.pi.logodds <- log(prob.pi.odds)
 
-plot(prob.pi, rep(0, 200), col = 'blue', pch = 19, ylim = c(-8, 15)) + 
-  points(prob.pi, prob.pi.odds, col = 'green', pch = 19) +
-  points(prob.pi, prob.pi.logodds, col = 'red', pch = 19) 
+plot(prob.pi, rep(0, 200), col = 'blue', pch = 19, cex = 0.3, ylim = c(-8, 15)) + 
+  points(prob.pi, prob.pi.odds, col = 'green', pch = 19, cex = 0.3) +
+  points(prob.pi, prob.pi.logodds, col = 'red', pch = 19, cex = 0.3) 
 ```
+
+How do you estimate these parameters? 
+Maximum likelihood estimation!
+
+```{r}
+vaping <- c(rep(0, 20), rep(1, 20))
+logodds <- 0.5 + 0.5 * vaping
+prob.pi <- 1 / (1 + exp(-logodds))
+Y <- rbinom(40, size = 1, prob = prob.pi)
+
+fit <- glm(Y ~ vaping, family = binomial)
+summary(fit)
+```
+
 
 ### Poisson Regression
 
-### 
+### Additional Resources
+
+- Very Normal on Logistic Regression: https://www.youtube.com/watch?v=Iju8l2qgaJU 

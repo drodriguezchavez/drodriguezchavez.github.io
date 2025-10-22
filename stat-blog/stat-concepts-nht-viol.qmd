@@ -48,7 +48,7 @@ Looking at the type-II error more in depth, we can rewrite that given the altern
 
 ### Violations of linear regression 
 
-**Linearity**
+**Linearity:**
 Recall that our estimates for $\beta$ are solved by minimizing the least squares equation 
 $$
 min \hspace{1mm} \Sigma_{i=1}^n (Y_i - [\beta_0 + \beta_1 X_i])^2
@@ -59,7 +59,7 @@ $$
 $$
 However, if the assumption of linearity is violated, then these estimates will be biased. Because these estimates will be biased, this means that both our predicted values $Y$, our errors $\vec{\epsilon} = (I-H)*Y$, and our variance $\vec{\epsilon}^T \vec{\epsilon} / (n-p)$ will also be biased. 
 
-**Homoskedasticity**
+**Homoskedasticity:**
 This assumptions is that the variance of the errors is the same. This implies that 
 $$
 Var(Y) = Var(\vec{\epsilon}) = \sigma^2 *I
@@ -80,9 +80,9 @@ $$
 \end{bmatrix} 
 $$
 
-Which would mean that not only our variance of the errors is biased, but also our variance for our estimates of $\hat{beta}$ and their subsequent standard errors will also be biased. 
+Which would mean that not only our variance of the errors is biased, but also our variance for our estimates of $\hat{\beta}$ and their subsequent standard errors will also be biased. 
 
-**Independence**
+**Independence:**
 We see up above that 
 $$
 Var(\beta) = \sigma^2 * I * (X^TX)^{-1}
@@ -91,16 +91,15 @@ However, if there is dependence between the errors, we have to account for this 
 $$
 Var(\beta) = (X^T X)^{-1} X^T * \Sigma * ( (X^T X)^{-1} X^T )^T
 $$
-Thus if we violate the assumptions of homoskedasticity, the variance and standard errors of our estimates will be biased. 
+Thus if we violate the assumptions of homoskedasticity, the variance and standard errors of our estimates will be biased. Having high multicollinearity means that our standard errors for our estimates will be higher, thus making our test statistic in typical linear regression smaller and our p-value thus bigger. 
 
-**Normally distributed**
-
+**Normally distributed:**
+Because we've assumed our errors are Normally distributed, if this is violated then when calculating our test-statistic for our hypothesis test, we can no longer say that it comes from a t-distribution. Thus not only will our test-statistic and subsequent p-value will be invalid, but our confidence interval will also be invalid since it assumes our test statistic comes from a t-distribution. 
 
 ### What happens to our confidence intervals? 
+Because we calculate our confidence intervals using the standard error of our estimates, from above that if linearity is violated, both the estimates and confidence intervals will be invalid. If homoskedasticity or independence is violated, the standard errors and thus our test-statistic, p-values, and confidence intervals will be invalid. If linearity is invalid, then the test statistic, p-value, and confidence interval will be invalid. 
 
-what steps are invalid when you go through the procedure?
-what does it mean for a confidence interval to be invalid? what does that mean?
-can you walk through that?
+Invalid meaning that we can no longer say with $(1-\alpha)$% certainty that the interval will contain the true parameter. 
 
 ### What happens to our type-I and type-II errors?
 
@@ -108,3 +107,4 @@ can you walk through that?
 ### Additional Resources
 
 -   Video on power: <https://www.youtube.com/watch?v=KPWzdtOMhTY>
+- On regression: https://stats.stackexchange.com/questions/29731/regression-when-the-ols-residuals-are-not-normally-distributed/29748#29748 

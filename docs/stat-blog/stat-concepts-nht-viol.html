@@ -5033,12 +5033,12 @@ window.Quarto = {
 </section>
 <section id="violations-of-linear-regression" class="level3">
 <h3 class="anchored" data-anchor-id="violations-of-linear-regression">Violations of linear regression</h3>
-<p><strong>Linearity</strong> Recall that our estimates for <span class="math inline">\(\beta\)</span> are solved by minimizing the least squares equation <span class="math display">\[
+<p><strong>Linearity:</strong> Recall that our estimates for <span class="math inline">\(\beta\)</span> are solved by minimizing the least squares equation <span class="math display">\[
 min \hspace{1mm} \Sigma_{i=1}^n (Y_i - [\beta_0 + \beta_1 X_i])^2
 \]</span> The assumption in the least squares solution here is that the model is linear. Solving this, we get that <span class="math display">\[
 \vec{\hat{\beta}} = (X^T X)^{-1} X^T Y
 \]</span> However, if the assumption of linearity is violated, then these estimates will be biased. Because these estimates will be biased, this means that both our predicted values <span class="math inline">\(Y\)</span>, our errors <span class="math inline">\(\vec{\epsilon} = (I-H)*Y\)</span>, and our variance <span class="math inline">\(\vec{\epsilon}^T \vec{\epsilon} / (n-p)\)</span> will also be biased.</p>
-<p><strong>Homoskedasticity</strong> This assumptions is that the variance of the errors is the same. This implies that <span class="math display">\[
+<p><strong>Homoskedasticity:</strong> This assumptions is that the variance of the errors is the same. This implies that <span class="math display">\[
 Var(Y) = Var(\vec{\epsilon}) = \sigma^2 *I
 \]</span> where <span class="math inline">\(I\)</span> is the identity matrix. Additionally, our variance for our <span class="math inline">\(\beta\)</span>’s can be written as</p>
 <p><span class="math display">\[
@@ -5052,17 +5052,18 @@ Var(\beta) = \sigma^2 * I * (X^TX)^{-1}
 0 &amp; 0 &amp; 0 &amp; \sigma_n^2
 \end{bmatrix}
 \]</span></p>
-<p>Which would mean that not only our variance of the errors is biased, but also our variance for our estimates of <span class="math inline">\(\hat{beta}\)</span> and their subsequent standard errors will also be biased.</p>
-<p><strong>Independence</strong> We see up above that <span class="math display">\[
+<p>Which would mean that not only our variance of the errors is biased, but also our variance for our estimates of <span class="math inline">\(\hat{\beta}\)</span> and their subsequent standard errors will also be biased.</p>
+<p><strong>Independence:</strong> We see up above that <span class="math display">\[
 Var(\beta) = \sigma^2 * I * (X^TX)^{-1}
 \]</span> However, if there is dependence between the errors, we have to account for this by a covariance-matrix <span class="math inline">\(\Sigma\)</span>, meaning that our variance is unsimplified to <span class="math display">\[
 Var(\beta) = (X^T X)^{-1} X^T * \Sigma * ( (X^T X)^{-1} X^T )^T
-\]</span> Thus if we violate the assumptions of homoskedasticity, the variance and standard errors of our estimates will be biased.</p>
-<p><strong>Normally distributed</strong></p>
+\]</span> Thus if we violate the assumptions of homoskedasticity, the variance and standard errors of our estimates will be biased. Having high multicollinearity means that our standard errors for our estimates will be higher, thus making our test statistic in typical linear regression smaller and our p-value thus bigger.</p>
+<p><strong>Normally distributed:</strong> Because we’ve assumed our errors are Normally distributed, if this is violated then when calculating our test-statistic for our hypothesis test, we can no longer say that it comes from a t-distribution. Thus not only will our test-statistic and subsequent p-value will be invalid, but our confidence interval will also be invalid since it assumes our test statistic comes from a t-distribution.</p>
 </section>
 <section id="what-happens-to-our-confidence-intervals" class="level3">
 <h3 class="anchored" data-anchor-id="what-happens-to-our-confidence-intervals">What happens to our confidence intervals?</h3>
-<p>what steps are invalid when you go through the procedure? what does it mean for a confidence interval to be invalid? what does that mean? can you walk through that?</p>
+<p>Because we calculate our confidence intervals using the standard error of our estimates, from above that if linearity is violated, both the estimates and confidence intervals will be invalid. If homoskedasticity or independence is violated, the standard errors and thus our test-statistic, p-values, and confidence intervals will be invalid. If linearity is invalid, then the test statistic, p-value, and confidence interval will be invalid.</p>
+<p>Invalid meaning that we can no longer say with <span class="math inline">\((1-\alpha)\)</span>% certainty that the interval will contain the true parameter.</p>
 </section>
 <section id="what-happens-to-our-type-i-and-type-ii-errors" class="level3">
 <h3 class="anchored" data-anchor-id="what-happens-to-our-type-i-and-type-ii-errors">What happens to our type-I and type-II errors?</h3>
@@ -5071,6 +5072,7 @@ Var(\beta) = (X^T X)^{-1} X^T * \Sigma * ( (X^T X)^{-1} X^T )^T
 <h3 class="anchored" data-anchor-id="additional-resources">Additional Resources</h3>
 <ul>
 <li>Video on power: <a href="https://www.youtube.com/watch?v=KPWzdtOMhTY" class="uri">https://www.youtube.com/watch?v=KPWzdtOMhTY</a></li>
+<li>On regression: https://stats.stackexchange.com/questions/29731/regression-when-the-ols-residuals-are-not-normally-distributed/29748#29748</li>
 </ul>
 
 
